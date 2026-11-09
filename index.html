@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HartSMP | Fabric & Purpur Cross-Play</title>
+    
+    <!-- Fonts: Poppins for Headings, Inter for Body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        slate: {
+                            850: '#1e293b',
+                            900: '#0f172a',
+                            950: '#0b0f19', // Deep slate requested
+                        },
+                        discord: '#5865F2',
+                        discordHover: '#4752C4'
+                    },
+                    backgroundImage: {
+                        'hero-pattern': "linear-gradient(to bottom, rgba(11, 15, 25, 0.7), rgba(11, 15, 25, 1)), url('https://images.unsplash.com/photo-1627856013091-fed6e4e30025?q=80&w=2070&auto=format&fit=crop')",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0f19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #10b981; /* Emerald accent */
+        }
+
+        /* Glassmorphism Utilities */
+        .glass {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .glass-card {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.6) 0%, rgba(30, 41, 59, 0.2) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Toast Animation */
+        #toast {
+            visibility: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        #toast.show {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Image overlay gradient */
+        .img-gradient::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(11, 15, 25, 0.9) 0%, transparent 50%);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-300 font-sans antialiased selection:bg-emerald-500/30 selection:text-emerald-200">
+
+    <!-- Sticky Navbar -->
+    <nav class="fixed w-full z-50 transition-all duration-300 glass border-b-0" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-lg bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                        <i class="ph-fill ph-cube text-2xl"></i>
+                    </div>
+                    <span class="font-heading font-bold text-2xl text-white tracking-tight">Hart<span class="text-emerald-500">SMP</span></span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-1">
+                        <a href="#home" class="px-4 py-2 rounded-md text-sm font-medium text-white bg-white/5 hover:bg-white/10 transition-colors">Home</a>
+                        <a href="#whitelist" class="px-4 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Whitelist</a>
+                        <a href="#mods" class="px-4 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Mods</a>
+                        <a href="#gallery" class="px-4 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Gallery</a>
+                        <a href="#support" class="px-4 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Donate</a>
+                    </div>
+                </div>
+
+                <!-- Discord Login (Desktop) -->
+                <div class="hidden md:block">
+                    <button class="flex items-center gap-2 bg-discord hover:bg-discordHover text-white px-5 py-2.5 rounded-lg font-medium transition-all shadow-[0_0_15px_rgba(88,101,242,0.4)] hover:shadow-[0_0_25px_rgba(88,101,242,0.6)]">
+                        <i class="ph-fill ph-discord-logo text-xl"></i>
+                        Login with Discord
+                    </button>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-300 hover:text-white focus:outline-none p-2 rounded-md bg-white/5">
+                        <i class="ph ph-list text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden glass border-t border-white/5">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium text-white bg-white/10">Home</a>
+                <a href="#whitelist" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Whitelist</a>
+                <a href="#mods" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Mods</a>
+                <a href="#gallery" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Gallery</a>
+                <a href="#support" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Donate</a>
+                <button class="w-full mt-4 flex items-center justify-center gap-2 bg-discord hover:bg-discordHover text-white px-5 py-3 rounded-lg font-medium transition-all">
+                    <i class="ph-fill ph-discord-logo text-xl"></i>
+                    Login with Discord
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-hero-pattern bg-cover bg-center bg-fixed">
+        <!-- Accent Glows behind content -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-600/20 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-[30rem] h-[30rem] bg-amber-500/10 rounded-full blur-[150px] pointer-events-none"></div>
+
+        <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
+            
+            <!-- Online Status Pill -->
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-emerald-500/30 mb-8">
+                <span class="relative flex h-3 w-3">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                </span>
+                <span class="text-sm font-medium text-emerald-50">12 / 50 Players Online</span>
+            </div>
+
+            <h1 class="text-5xl md:text-7xl font-heading font-extrabold text-white tracking-tight leading-tight mb-6">
+                Craft Your Legacy.<br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-600">Together.</span>
+            </h1>
+            
+            <p class="mt-4 max-w-2xl text-lg md:text-xl text-slate-300 mb-10">
+                A premium Fabric & Purpur cross-play experience. Seamless Bedrock integration, vanilla-tweaked economy, and a community built on trust.
+            </p>
+
+            <!-- IP Copy Box -->
+            <div class="flex flex-col sm:flex-row items-center gap-4">
+                <div class="glass-card p-2 pr-4 rounded-xl flex items-center gap-4 group cursor-pointer hover:border-emerald-500/50 transition-all" onclick="copyIP()">
+                    <div class="bg-slate-900 rounded-lg px-4 py-3 flex items-center justify-center border border-white/5 group-hover:border-emerald-500/30 transition-colors">
+                        <i class="ph ph-copy text-xl text-emerald-400"></i>
+                    </div>
+                    <div class="text-left">
+                        <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Server IP (Java & Bedrock)</p>
+                        <p class="text-xl font-mono font-bold text-white" id="server-ip">play.hartsmp.net</p>
+                    </div>
+                </div>
+                
+                <a href="#whitelist" class="px-8 py-4 rounded-xl font-semibold bg-white text-slate-950 hover:bg-slate-200 transition-colors flex items-center gap-2">
+                    Apply Now <i class="ph-bold ph-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+            <i class="ph ph-caret-down text-3xl text-slate-500"></i>
+        </div>
+    </section>
+
+    <!-- Whitelist Process -->
+    <section id="whitelist" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-heading font-bold text-white mb-4">Join the Community</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">We use a Discord-linked whitelisting system to keep our server safe from griefers and ensure a high-quality experience for everyone.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="glass-card rounded-2xl p-8 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+                    <div class="absolute top-0 right-0 -mr-4 -mt-4 text-9xl font-heading font-black text-white/[0.02] group-hover:text-white/[0.05] transition-colors pointer-events-none">1</div>
+                    <div class="w-14 h-14 rounded-xl bg-discord/20 text-discord flex items-center justify-center mb-6">
+                        <i class="ph-fill ph-discord-logo text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Login with Discord</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">Authenticate your Discord account securely. We use this to verify your identity and sync your in-game roles automatically.</p>
+                    <button class="w-full py-3 bg-discord/10 hover:bg-discord hover:text-white text-discord rounded-lg font-medium transition-colors border border-discord/30 hover:border-discord">
+                        Connect Account
+                    </button>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="glass-card rounded-2xl p-8 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+                    <div class="absolute top-0 right-0 -mr-4 -mt-4 text-9xl font-heading font-black text-white/[0.02] group-hover:text-white/[0.05] transition-colors pointer-events-none">2</div>
+                    <div class="w-14 h-14 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center mb-6">
+                        <i class="ph-fill ph-scroll text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Accept the Rules</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Read through our community guidelines. We have a strict zero-tolerance policy for unconsented PvP, stealing, and griefing.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="glass-card rounded-2xl p-8 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+                    <div class="absolute top-0 right-0 -mr-4 -mt-4 text-9xl font-heading font-black text-white/[0.02] group-hover:text-white/[0.05] transition-colors pointer-events-none">3</div>
+                    <div class="w-14 h-14 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center mb-6">
+                        <i class="ph-fill ph-paper-plane-tilt text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Submit Application</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Enter your Minecraft IGN and a brief intro. Our admin team will review it and you'll get a Discord ping once whitelisted.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mods & Downloads -->
+    <section id="mods" class="py-24 bg-slate-900/50 relative border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-heading font-bold text-white mb-4">Client Connections</h2>
+                    <p class="text-slate-400 max-w-xl">Whether you play on Java or Bedrock, we've got you covered. Here are our recommended client mods for the best experience.</p>
+                </div>
+                <div class="flex gap-3">
+                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-white/10 text-white border border-white/10">Fabric 1.20.4</span>
+                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-white/10 text-white border border-white/10">Purpur</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Xaero's Minimap Card -->
+                <div class="bg-slate-850 p-6 rounded-2xl border border-white/5 hover:border-blue-500/30 transition-colors">
+                    <div class="flex items-center gap-4 mb-4">
+                        <img src="https://placehold.co/48x48/1e293b/3b82f6?text=X" class="rounded-lg shadow-md" alt="Xaero Icon">
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Xaero's Minimap</h4>
+                            <p class="text-xs text-slate-500 font-medium">Navigation</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-400 mb-6">Keep track of your surroundings, mark waypoints, and never lose your base again. Fully server-approved.</p>
+                    <a href="https://modrinth.com/mod/xaeros-minimap" target="_blank" class="inline-flex items-center gap-2 text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors">
+                        Download via Modrinth <i class="ph-bold ph-download-simple"></i>
+                    </a>
+                </div>
+
+                <!-- Sodium Card -->
+                <div class="bg-slate-850 p-6 rounded-2xl border border-white/5 hover:border-emerald-500/30 transition-colors">
+                    <div class="flex items-center gap-4 mb-4">
+                        <img src="https://placehold.co/48x48/1e293b/10b981?text=S" class="rounded-lg shadow-md" alt="Sodium Icon">
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Sodium</h4>
+                            <p class="text-xs text-slate-500 font-medium">Fabric Performance</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-400 mb-6">Highly recommended for Java players. Dramatically improves framerates and reduces micro-stutters better than Optifine.</p>
+                    <a href="https://modrinth.com/mod/sodium" target="_blank" class="inline-flex items-center gap-2 text-sm font-medium text-emerald-400 hover:text-emerald-300 transition-colors">
+                        Download via Modrinth <i class="ph-bold ph-download-simple"></i>
+                    </a>
+                </div>
+
+                <!-- Iris Card -->
+                <div class="bg-slate-850 p-6 rounded-2xl border border-white/5 hover:border-purple-500/30 transition-colors">
+                    <div class="flex items-center gap-4 mb-4">
+                        <img src="https://placehold.co/48x48/1e293b/a855f7?text=I" class="rounded-lg shadow-md" alt="Iris Icon">
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Iris Shaders</h4>
+                            <p class="text-xs text-slate-500 font-medium">Fabric Visuals</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-400 mb-6">Want the game to look like our screenshots? Install Iris alongside Sodium to run modern shader packs flawlessly.</p>
+                    <a href="https://modrinth.com/mod/iris" target="_blank" class="inline-flex items-center gap-2 text-sm font-medium text-purple-400 hover:text-purple-300 transition-colors">
+                        Download via Modrinth <i class="ph-bold ph-download-simple"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Past Servers Gallery (Masonry) -->
+    <section id="gallery" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-heading font-bold text-white mb-4">Our History</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">A look back at the incredible builds and memories from past seasons.</p>
+            </div>
+
+            <!-- CSS Multi-column Masonry -->
+            <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
+                <!-- Image Item -->
+                <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-slate-900 border border-white/5">
+                    <div class="img-gradient relative h-full w-full">
+                        <img src="https://images.unsplash.com/photo-1627856013091-fed6e4e30025?q=80&w=800&auto=format&fit=crop" alt="Minecraft Castle Build" class="w-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <div class="absolute bottom-0 left-0 p-6 z-10">
+                        <p class="text-emerald-400 text-xs font-bold uppercase tracking-wider mb-1">Season 3</p>
+                        <h3 class="text-white font-medium text-lg">The Grand Citadel</h3>
+                    </div>
+                </div>
+
+                <!-- Image Item -->
+                <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-slate-900 border border-white/5">
+                    <div class="img-gradient relative h-full w-full">
+                        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800&auto=format&fit=crop" alt="Server Spawn" class="w-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <div class="absolute bottom-0 left-0 p-6 z-10">
+                        <p class="text-emerald-400 text-xs font-bold uppercase tracking-wider mb-1">Season 4</p>
+                        <h3 class="text-white font-medium text-lg">Market District</h3>
+                    </div>
+                </div>
+
+                <!-- Image Item -->
+                <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-slate-900 border border-white/5">
+                    <div class="img-gradient relative h-full w-full">
+                        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=800&auto=format&fit=crop" alt="Redstone Contraption" class="w-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <div class="absolute bottom-0 left-0 p-6 z-10">
+                        <p class="text-emerald-400 text-xs font-bold uppercase tracking-wider mb-1">Tech Hub</p>
+                        <h3 class="text-white font-medium text-lg">Industrial Sector</h3>
+                    </div>
+                </div>
+
+                <!-- Image Item -->
+                <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-slate-900 border border-white/5">
+                    <div class="img-gradient relative h-full w-full">
+                        <img src="https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?q=80&w=800&auto=format&fit=crop" alt="Nighttime City" class="w-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <div class="absolute bottom-0 left-0 p-6 z-10">
+                        <p class="text-emerald-400 text-xs font-bold uppercase tracking-wider mb-1">Season 2</p>
+                        <h3 class="text-white font-medium text-lg">Neon Heights</h3>
+                    </div>
+                </div>
+                
+                <!-- Image Item -->
+                <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-slate-900 border border-white/5">
+                    <div class="img-gradient relative h-full w-full">
+                        <img src="https://images.unsplash.com/photo-1618331835717-801e976710b2?q=80&w=800&auto=format&fit=crop" alt="Underground Base" class="w-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <div class="absolute bottom-0 left-0 p-6 z-10">
+                        <p class="text-emerald-400 text-xs font-bold uppercase tracking-wider mb-1">Community Project</p>
+                        <h3 class="text-white font-medium text-lg">Dwarven Halls</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Us (Ko-fi Style) -->
+    <section id="support" class="py-24 bg-slate-900/30 border-t border-white/5">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card rounded-3xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-10">
+                <div class="md:w-1/2">
+                    <div class="w-12 h-12 bg-rose-500/20 text-rose-500 rounded-full flex items-center justify-center mb-6">
+                        <i class="ph-fill ph-heart text-2xl"></i>
+                    </div>
+                    <h2 class="text-3xl font-heading font-bold text-white mb-4">Keep the Lights On</h2>
+                    <p class="text-slate-400 mb-6">Our server runs 24/7 on dedicated hardware. We rely completely on community donations to cover our monthly hosting and domain fees. No pay-to-win, just pure support.</p>
+                </div>
+                
+                <div class="md:w-1/2 w-full flex justify-center">
+                    <!-- Embedded Ko-fi Widget -->
+                    <iframe id='kofiframe' src='https://ko-fi.com/xhosh/?hidefeed=true&widget=true&embed=true&preview=true' style='border:none;width:100%;padding:4px;background:transparent;border-radius:0.75rem;' height='712' title='xhosh'></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5 bg-slate-950 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-2">
+                <i class="ph-fill ph-cube text-xl text-emerald-500"></i>
+                <span class="font-heading font-bold text-lg text-white">HartSMP</span>
+            </div>
+            
+            <p class="text-sm text-slate-500 text-center md:text-left">
+                Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.
+            </p>
+
+            <div class="flex gap-4">
+                <a href="#" class="text-slate-500 hover:text-white transition-colors">
+                    <i class="ph-fill ph-discord-logo text-2xl"></i>
+                </a>
+                <a href="#" class="text-slate-500 hover:text-white transition-colors">
+                    <i class="ph-fill ph-github-logo text-2xl"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom Toast Notification -->
+    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 bg-slate-800 text-white px-5 py-3 rounded-full border border-emerald-500/30 shadow-2xl shadow-emerald-500/20">
+        <div class="bg-emerald-500/20 text-emerald-400 rounded-full p-1">
+            <i class="ph-bold ph-check text-sm"></i>
+        </div>
+        <span class="text-sm font-medium">IP copied to clipboard!</span>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Copy IP Functionality
+        function copyIP() {
+            const ipText = document.getElementById('server-ip').innerText;
+            const toast = document.getElementById('toast');
+
+            // Fallback for iFrame restrictions as per constraints, using execCommand
+            const textArea = document.createElement("textarea");
+            textArea.value = ipText;
+            
+            // Avoid scrolling to bottom
+            textArea.style.top = "0";
+            textArea.style.left = "0";
+            textArea.style.position = "fixed";
+            
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                // Show Toast
+                toast.classList.add('show');
+                
+                // Hide Toast after 3s
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            } catch (err) {
+                console.error('Fallback: Oops, unable to copy', err);
+            }
+            
+            document.body.removeChild(textArea);
+        }
+    </script>
+</body>
+</html>
