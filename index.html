@@ -113,17 +113,18 @@
 
             <!-- IP Copy Box -->
             <div class="flex flex-col sm:flex-row items-center gap-4">
-                <div class="glass-card p-2 pr-4 rounded-xl flex items-center gap-4 group cursor-pointer hover:border-emerald-500/50 transition-all" onclick="copyIP()">
-                    <div class="bg-slate-900 rounded-lg px-4 py-3 flex items-center justify-center border border-white/5 group-hover:border-emerald-500/30 transition-colors">
-                        <i class="ph ph-copy text-xl text-emerald-400"></i>
+                <div class="flex items-center gap-4 bg-slate-900/80 border border-pink-500/40 px-6 py-4 rounded-2xl shadow-xl backdrop-blur-md">
+                    <div class="w-12 h-12 rounded-xl bg-pink-500/20 border border-pink-500/30 flex items-center justify-center text-pink-400">
+                        <i class="ph-bold ph-copy text-xl"></i>
                     </div>
-                    <div class="text-left">
-                        <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold"><span id="ip-label">Server address</span></p>
-                        <p class="text-xl font-mono font-bold text-white" id="server-ip">Login to reveal</p>
+                    <div>
+                        <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Server Address</p>
+                        <p class="font-mono text-lg font-bold text-white tracking-wide">Login to reveal</p>
                     </div>
                 </div>
                 
-                <a href="#whitelist" class="px-8 py-4 rounded-xl font-semibold bg-white text-slate-950 hover:bg-slate-200 transition-colors flex items-center gap-2">
+                <!-- Apply Now Button (Optional: you can also accent this if you want) -->
+                <a href="#whitelist" class="px-8 py-4 rounded-2xl font-heading font-bold bg-white text-slate-900 hover:bg-slate-100 transition-all shadow-lg inline-flex items-center gap-2">
                     Apply Now <i class="ph-bold ph-arrow-right"></i>
                 </a>
             </div>
