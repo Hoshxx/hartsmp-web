@@ -28,7 +28,7 @@ const routes = {
     setCookie(res, 'st', state, 600);
     const q = new URLSearchParams({
       client_id: E.DISCORD_CLIENT_ID, response_type: 'code', state,
-      scope: 'identify guilds.members.read',
+      scope: 'identify', // Minimized scope since we aren't checking guild roles anymore
       redirect_uri: E.SITE_URL + '/api/callback',
     });
     res.redirect('https://discord.com/oauth2/authorize?' + q);
@@ -48,13 +48,13 @@ const routes = {
     if (!t.access_token) return res.redirect('/?login=failed');
 
     const u = await discord('/users/@me', t.access_token).then(r => r.json());
-    const m = await discord(`/users/@me/guilds/${E.DISCORD_GUILD_ID}/member`, t.access_token);
-    const member = m.ok ? await m.json() : null;
+    
+    // Bypassed role/guild checks: Everyone logging in is marked as whitelisted/inGuild for direct IP viewing
     const d = {
       id: u.id, name: u.global_name || u.username,
-      inGuild: !!member,
-      whitelisted: !!member && member.roles.includes(E.WHITELIST_ROLE_ID),
-      exp: Date.now() + 864e5, // 24h; log in again to refresh role status
+      inGuild: true,
+      whitelisted: true,
+      exp: Date.now() + 864e5, // 24h
     };
     const p = Buffer.from(JSON.stringify(d)).toString('base64url');
     setCookie(res, 'sess', `${p}.${sign(p)}`, 86400);
@@ -67,9 +67,8 @@ const routes = {
     const s = readSession(req);
     if (!s) return res.json({ loggedIn: false });
     res.json({
-      loggedIn: true, name: s.name, inGuild: s.inGuild, whitelisted: s.whitelisted,
-      // The address is only ever sent to whitelisted members
-      ...(s.whitelisted && { ip: E.SERVER_IP, bedrockPort: E.BEDROCK_PORT || '19132' }),
+      loggedIn: true, name: s.name, inGuild: true, whitelisted: true,
+      ip: E.SERVER_IP, bedrockPort: E.BEDROCK_PORT || '19132',
     });
   },
 
@@ -88,27 +87,8 @@ const routes = {
   },
 
   async apply(req, res) {
-    if (req.method !== 'POST') return res.status(405).end();
-    const s = readSession(req);
-    if (!s || !s.inGuild) return res.status(401).end();
-    const { ign, about } = req.body || {};
-    if (!/^\.?[A-Za-z0-9_ ]{3,16}$/.test(ign || '') || !about || about.length > 600) return res.status(400).end();
-    const r = await fetch(E.WEBHOOK_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        allowed_mentions: { parse: [] },
-        embeds: [{
-          title: 'Whitelist application', color: 0x10b981,
-          fields: [
-            { name: 'Discord', value: `<@${s.id}> (${s.name})` },
-            { name: 'Minecraft IGN', value: ign },
-            { name: 'About', value: about },
-          ],
-        }],
-      }),
-    });
-    res.status(r.ok ? 200 : 502).json({ ok: r.ok });
+    // Disabled since you are managing applications/whitelisting manually
+    res.status(501).json({ error: 'Not implemented' });
   },
 };
 
