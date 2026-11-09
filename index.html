@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HartSMP | Fabric & Purpur Cross-Play</title>
+    <meta name="description" content="HartSMP: a whitelisted Fabric &amp; Purpur Minecraft SMP with Java and Bedrock cross-play.">
+    <meta name="theme-color" content="#0b0f19">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="HartSMP | Fabric &amp; Purpur Cross-Play">
+    <meta property="og:description" content="HartSMP: a whitelisted Fabric &amp; Purpur Minecraft SMP with Java and Bedrock cross-play.">
+    <meta property="og:url" content="https://hartsmp.art">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%B1%3C/text%3E%3C/svg%3E">
     
     <!-- Fonts: Poppins for Headings, Inter for Body -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,89 +18,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Icons -->
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        heading: ['Poppins', 'sans-serif'],
-                    },
-                    colors: {
-                        slate: {
-                            850: '#1e293b',
-                            900: '#0f172a',
-                            950: '#0b0f19', // Deep slate requested
-                        },
-                        discord: '#5865F2',
-                        discordHover: '#4752C4'
-                    },
-                    backgroundImage: {
-                        'hero-pattern': "linear-gradient(to bottom, rgba(11, 15, 25, 0.7), rgba(11, 15, 25, 1)), url('https://images.unsplash.com/photo-1627856013091-fed6e4e30025?q=80&w=2070&auto=format&fit=crop')",
-                    }
-                }
-            }
-        }
-    </script>
+    <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
 
-    <style>
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0b0f19;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #1e293b;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #10b981; /* Emerald accent */
-        }
 
-        /* Glassmorphism Utilities */
-        .glass {
-            background: rgba(30, 41, 59, 0.4);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .glass-card {
-            background: linear-gradient(145deg, rgba(30, 41, 59, 0.6) 0%, rgba(30, 41, 59, 0.2) 100%);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Toast Animation */
-        #toast {
-            visibility: hidden;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-        #toast.show {
-            visibility: visible;
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Image overlay gradient */
-        .img-gradient::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(11, 15, 25, 0.9) 0%, transparent 50%);
-            pointer-events: none;
-        }
-    </style>
+    <link rel="stylesheet" href="/tw.css">
 </head>
 <body class="bg-slate-950 text-slate-300 font-sans antialiased selection:bg-emerald-500/30 selection:text-emerald-200">
 
@@ -116,7 +44,7 @@
                         <a href="#whitelist" class="px-4 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Whitelist</a>
                         <a href="#mods" class="px-4 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Mods</a>
                         <a href="#gallery" class="px-4 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Gallery</a>
-                        <a href="#support" class="px-4 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Donate</a>
+                        <a href="#support" class="px-4 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Support</a>
                     </div>
                 </div>
 
@@ -130,7 +58,7 @@
 
                 <!-- Mobile menu button -->
                 <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-slate-300 hover:text-white focus:outline-none p-2 rounded-md bg-white/5">
+                    <button id="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false" class="text-slate-300 hover:text-white focus:outline-none p-2 rounded-md bg-white/5">
                         <i class="ph ph-list text-2xl"></i>
                     </button>
                 </div>
@@ -144,7 +72,7 @@
                 <a href="#whitelist" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Whitelist</a>
                 <a href="#mods" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Mods</a>
                 <a href="#gallery" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Gallery</a>
-                <a href="#support" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Donate</a>
+                <a href="#support" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Support</a>
                 <button class="w-full mt-4 flex items-center justify-center gap-2 bg-discord hover:bg-discordHover text-white px-5 py-3 rounded-lg font-medium transition-all">
                     <i class="ph-fill ph-discord-logo text-xl"></i>
                     Login with Discord
@@ -162,12 +90,12 @@
         <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
             
             <!-- Online Status Pill -->
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-emerald-500/30 mb-8">
+            <div id="status-pill" class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-emerald-500/30 mb-8">
                 <span class="relative flex h-3 w-3">
                   <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                   <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
                 </span>
-                <span class="text-sm font-medium text-emerald-50">12 / 50 Players Online</span>
+                <span id="players-text" class="text-sm font-medium text-emerald-50">Checking server…</span>
             </div>
 
             <h1 class="text-5xl md:text-7xl font-heading font-extrabold text-white tracking-tight leading-tight mb-6">
@@ -176,7 +104,7 @@
             </h1>
             
             <p class="mt-4 max-w-2xl text-lg md:text-xl text-slate-300 mb-10">
-                A premium Fabric & Purpur cross-play experience. Seamless Bedrock integration, vanilla-tweaked economy, and a community built on trust.
+                A Fabric & Purpur SMP with Java and Bedrock cross-play, and a community built on trust.
             </p>
 
             <!-- IP Copy Box -->
@@ -186,8 +114,8 @@
                         <i class="ph ph-copy text-xl text-emerald-400"></i>
                     </div>
                     <div class="text-left">
-                        <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Server IP (Java & Bedrock)</p>
-                        <p class="text-xl font-mono font-bold text-white" id="server-ip">play.hartsmp.net</p>
+                        <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold"><span id="ip-label">Server address</span></p>
+                        <p class="text-xl font-mono font-bold text-white" id="server-ip">Login to reveal</p>
                     </div>
                 </div>
                 
@@ -248,6 +176,36 @@
         </div>
     </section>
 
+    <!-- Whitelist Application -->
+    <section id="apply" class="py-20 border-t border-white/5">
+        <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card rounded-2xl p-8">
+                <h2 class="text-2xl font-heading font-bold text-white mb-2">Whitelist Application</h2>
+                <p id="apply-msg" class="text-slate-400 mb-6">Checking your login…</p>
+                <form id="apply-form" class="hidden space-y-4">
+                    <div>
+                        <label for="ign" class="block text-sm text-slate-300 mb-1">Minecraft username</label>
+                        <input id="ign" required maxlength="17" pattern="\.?[A-Za-z0-9_ ]{3,16}" placeholder="Steve (Bedrock: .Steve)" class="w-full rounded-lg bg-slate-900 border border-white/10 px-4 py-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label for="about" class="block text-sm text-slate-300 mb-1">Tell us about yourself</label>
+                        <textarea id="about" required maxlength="600" rows="4" class="w-full rounded-lg bg-slate-900 border border-white/10 px-4 py-2.5 text-white focus:border-emerald-500 focus:outline-none"></textarea>
+                    </div>
+                    <!-- Edit these to match your real rules -->
+                    <ul class="text-sm text-slate-400 list-disc pl-5 space-y-1">
+                        <li>No unconsented PvP</li>
+                        <li>No stealing</li>
+                        <li>No griefing</li>
+                    </ul>
+                    <label class="flex items-start gap-2 text-sm text-slate-300">
+                        <input id="rules" type="checkbox" required class="mt-1 accent-emerald-500"> I've read and accept the rules.
+                    </label>
+                    <button type="submit" id="apply-btn" class="w-full rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold py-3 transition-colors">Submit application</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
     <!-- Mods & Downloads -->
     <section id="mods" class="py-24 bg-slate-900/50 relative border-y border-white/5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -257,7 +215,7 @@
                     <p class="text-slate-400 max-w-xl">Whether you play on Java or Bedrock, we've got you covered. Here are our recommended client mods for the best experience.</p>
                 </div>
                 <div class="flex gap-3">
-                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-white/10 text-white border border-white/10">Fabric 1.20.4</span>
+                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-white/10 text-white border border-white/10">Fabric · version TBA</span>
                     <span class="px-3 py-1 rounded-full text-xs font-semibold bg-white/10 text-white border border-white/10">Purpur</span>
                 </div>
             </div>
@@ -267,13 +225,13 @@
                 <!-- Xaero's Minimap Card -->
                 <div class="bg-slate-850 p-6 rounded-2xl border border-white/5 hover:border-blue-500/30 transition-colors">
                     <div class="flex items-center gap-4 mb-4">
-                        <img src="https://placehold.co/48x48/1e293b/3b82f6?text=X" class="rounded-lg shadow-md" alt="Xaero Icon">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='8' fill='%231e293b'/%3E%3Ctext x='24' y='32' font-family='sans-serif' font-size='24' font-weight='700' text-anchor='middle' fill='%233b82f6'%3EX%3C/text%3E%3C/svg%3E" class="rounded-lg shadow-md" alt="Xaero Icon">
                         <div>
                             <h4 class="text-lg font-bold text-white">Xaero's Minimap</h4>
                             <p class="text-xs text-slate-500 font-medium">Navigation</p>
                         </div>
                     </div>
-                    <p class="text-sm text-slate-400 mb-6">Keep track of your surroundings, mark waypoints, and never lose your base again. Fully server-approved.</p>
+                    <p class="text-sm text-slate-400 mb-6">Keep track of your surroundings, mark waypoints, and never lose your base again.</p>
                     <a href="https://modrinth.com/mod/xaeros-minimap" target="_blank" class="inline-flex items-center gap-2 text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors">
                         Download via Modrinth <i class="ph-bold ph-download-simple"></i>
                     </a>
@@ -282,7 +240,7 @@
                 <!-- Sodium Card -->
                 <div class="bg-slate-850 p-6 rounded-2xl border border-white/5 hover:border-emerald-500/30 transition-colors">
                     <div class="flex items-center gap-4 mb-4">
-                        <img src="https://placehold.co/48x48/1e293b/10b981?text=S" class="rounded-lg shadow-md" alt="Sodium Icon">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='8' fill='%231e293b'/%3E%3Ctext x='24' y='32' font-family='sans-serif' font-size='24' font-weight='700' text-anchor='middle' fill='%2310b981'%3ES%3C/text%3E%3C/svg%3E" class="rounded-lg shadow-md" alt="Sodium Icon">
                         <div>
                             <h4 class="text-lg font-bold text-white">Sodium</h4>
                             <p class="text-xs text-slate-500 font-medium">Fabric Performance</p>
@@ -297,7 +255,7 @@
                 <!-- Iris Card -->
                 <div class="bg-slate-850 p-6 rounded-2xl border border-white/5 hover:border-purple-500/30 transition-colors">
                     <div class="flex items-center gap-4 mb-4">
-                        <img src="https://placehold.co/48x48/1e293b/a855f7?text=I" class="rounded-lg shadow-md" alt="Iris Icon">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='8' fill='%231e293b'/%3E%3Ctext x='24' y='32' font-family='sans-serif' font-size='24' font-weight='700' text-anchor='middle' fill='%23a855f7'%3EI%3C/text%3E%3C/svg%3E" class="rounded-lg shadow-md" alt="Iris Icon">
                         <div>
                             <h4 class="text-lg font-bold text-white">Iris Shaders</h4>
                             <p class="text-xs text-slate-500 font-medium">Fabric Visuals</p>
@@ -326,7 +284,7 @@
                 <!-- Image Item -->
                 <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-slate-900 border border-white/5">
                     <div class="img-gradient relative h-full w-full">
-                        <img src="https://images.unsplash.com/photo-1627856013091-fed6e4e30025?q=80&w=800&auto=format&fit=crop" alt="Minecraft Castle Build" class="w-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                        <img src="assets/gallery/1.jpg" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%231e293b'/%3E%3Ctext x='400' y='310' font-family='sans-serif' font-size='28' text-anchor='middle' fill='%2364748b'%3EScreenshot coming soon%3C/text%3E%3C/svg%3E'" alt="Minecraft Castle Build" class="w-full object-cover transform group-hover:scale-105 transition-transform duration-700">
                     </div>
                     <div class="absolute bottom-0 left-0 p-6 z-10">
                         <p class="text-emerald-400 text-xs font-bold uppercase tracking-wider mb-1">Season 3</p>
@@ -337,7 +295,7 @@
                 <!-- Image Item -->
                 <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-slate-900 border border-white/5">
                     <div class="img-gradient relative h-full w-full">
-                        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800&auto=format&fit=crop" alt="Server Spawn" class="w-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                        <img src="assets/gallery/2.jpg" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%231e293b'/%3E%3Ctext x='400' y='310' font-family='sans-serif' font-size='28' text-anchor='middle' fill='%2364748b'%3EScreenshot coming soon%3C/text%3E%3C/svg%3E'" alt="Server Spawn" class="w-full object-cover transform group-hover:scale-105 transition-transform duration-700">
                     </div>
                     <div class="absolute bottom-0 left-0 p-6 z-10">
                         <p class="text-emerald-400 text-xs font-bold uppercase tracking-wider mb-1">Season 4</p>
@@ -348,7 +306,7 @@
                 <!-- Image Item -->
                 <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-slate-900 border border-white/5">
                     <div class="img-gradient relative h-full w-full">
-                        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=800&auto=format&fit=crop" alt="Redstone Contraption" class="w-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                        <img src="assets/gallery/3.jpg" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%231e293b'/%3E%3Ctext x='400' y='310' font-family='sans-serif' font-size='28' text-anchor='middle' fill='%2364748b'%3EScreenshot coming soon%3C/text%3E%3C/svg%3E'" alt="Redstone Contraption" class="w-full object-cover transform group-hover:scale-105 transition-transform duration-700">
                     </div>
                     <div class="absolute bottom-0 left-0 p-6 z-10">
                         <p class="text-emerald-400 text-xs font-bold uppercase tracking-wider mb-1">Tech Hub</p>
@@ -359,7 +317,7 @@
                 <!-- Image Item -->
                 <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-slate-900 border border-white/5">
                     <div class="img-gradient relative h-full w-full">
-                        <img src="https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?q=80&w=800&auto=format&fit=crop" alt="Nighttime City" class="w-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                        <img src="assets/gallery/4.jpg" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%231e293b'/%3E%3Ctext x='400' y='310' font-family='sans-serif' font-size='28' text-anchor='middle' fill='%2364748b'%3EScreenshot coming soon%3C/text%3E%3C/svg%3E'" alt="Nighttime City" class="w-full object-cover transform group-hover:scale-105 transition-transform duration-700">
                     </div>
                     <div class="absolute bottom-0 left-0 p-6 z-10">
                         <p class="text-emerald-400 text-xs font-bold uppercase tracking-wider mb-1">Season 2</p>
@@ -370,7 +328,7 @@
                 <!-- Image Item -->
                 <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-slate-900 border border-white/5">
                     <div class="img-gradient relative h-full w-full">
-                        <img src="https://images.unsplash.com/photo-1618331835717-801e976710b2?q=80&w=800&auto=format&fit=crop" alt="Underground Base" class="w-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                        <img src="assets/gallery/5.jpg" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%231e293b'/%3E%3Ctext x='400' y='310' font-family='sans-serif' font-size='28' text-anchor='middle' fill='%2364748b'%3EScreenshot coming soon%3C/text%3E%3C/svg%3E'" alt="Underground Base" class="w-full object-cover transform group-hover:scale-105 transition-transform duration-700">
                     </div>
                     <div class="absolute bottom-0 left-0 p-6 z-10">
                         <p class="text-emerald-400 text-xs font-bold uppercase tracking-wider mb-1">Community Project</p>
@@ -390,12 +348,19 @@
                         <i class="ph-fill ph-heart text-2xl"></i>
                     </div>
                     <h2 class="text-3xl font-heading font-bold text-white mb-4">Keep the Lights On</h2>
-                    <p class="text-slate-400 mb-6">Our server runs 24/7 on dedicated hardware. We rely completely on community donations to cover our monthly hosting and domain fees. No pay-to-win, just pure support.</p>
+                    <p class="text-slate-400 mb-6">Hosting isn't free. We rely on community donations to cover monthly hosting and domain fees. No pay-to-win, just pure support.</p>
+                    <div class="glass-card rounded-2xl p-4 flex items-center gap-4">
+                        <img src="assets/gcash-qr.png" alt="GCash QR Ph code" class="w-24 h-24 rounded-lg bg-white object-contain" onerror="this.style.display='none'">
+                        <div>
+                            <h3 class="font-heading font-semibold text-white">GCash / Maya</h3>
+                            <p class="text-sm text-slate-400">Scan with GCash, Maya or any bank app, then open a ticket in our Discord with the receipt so we can give you the Supporter role.</p>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="md:w-1/2 w-full flex justify-center">
                     <!-- Embedded Ko-fi Widget -->
-                    <iframe id='kofiframe' src='https://ko-fi.com/xhosh/?hidefeed=true&widget=true&embed=true&preview=true' style='border:none;width:100%;padding:4px;background:transparent;border-radius:0.75rem;' height='712' title='xhosh'></iframe>
+                    <iframe id='kofiframe' src='https://ko-fi.com/xhosh/?hidefeed=true&widget=true&embed=true' style='border:none;width:100%;padding:4px;background:transparent;border-radius:0.75rem;' height='712' title='xhosh'></iframe>
                 </div>
             </div>
         </div>
@@ -414,10 +379,10 @@
             </p>
 
             <div class="flex gap-4">
-                <a href="#" class="text-slate-500 hover:text-white transition-colors">
+                <a href="https://discord.gg/REPLACE_ME" target="_blank" rel="noopener" aria-label="Discord" class="text-slate-500 hover:text-white transition-colors">
                     <i class="ph-fill ph-discord-logo text-2xl"></i>
                 </a>
-                <a href="#" class="text-slate-500 hover:text-white transition-colors">
+                <a href="https://github.com/Hoshxx/hartsmp-web" target="_blank" rel="noopener" aria-label="GitHub" class="text-slate-500 hover:text-white transition-colors">
                     <i class="ph-fill ph-github-logo text-2xl"></i>
                 </a>
             </div>
@@ -434,47 +399,108 @@
 
     <!-- Scripts -->
     <script>
-        // Mobile Menu Toggle
-        const btn = document.getElementById('mobile-menu-btn');
-        const menu = document.getElementById('mobile-menu');
+        const DISCORD_INVITE = 'https://discord.gg/REPLACE_ME';
+        const $ = id => document.getElementById(id);
+        let user = { loggedIn: false };
 
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
+        // Mobile menu
+        const menu = $('mobile-menu'), mbtn = $('mobile-menu-btn');
+        mbtn.addEventListener('click', () => mbtn.setAttribute('aria-expanded', String(!menu.classList.toggle('hidden'))));
+
+        function toast(msg) {
+            const t = $('toast');
+            t.querySelector('span').textContent = msg;
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 3000);
+        }
+
+        // Copy IP (only works once the server has revealed it)
+        async function copyIP() {
+            if (!user.loggedIn) return location.href = '/api/login';
+            if (!user.whitelisted) { $('apply').scrollIntoView({ behavior: 'smooth' }); return toast('Get whitelisted to see the address'); }
+            if (!user.ip) return toast('Address not announced yet');
+            try { await navigator.clipboard.writeText(user.ip); }
+            catch {
+                const ta = document.createElement('textarea');
+                ta.value = user.ip; document.body.appendChild(ta); ta.select();
+                try { document.execCommand('copy'); } catch {}
+                ta.remove();
+            }
+            toast('IP copied to clipboard!');
+        }
+
+        // Login buttons
+        const loginBtns = [...document.querySelectorAll('button')].filter(b => /Discord|Connect Account/.test(b.textContent));
+        loginBtns.forEach(b => b.addEventListener('click', () => location.href = user.loggedIn ? '/api/logout' : '/api/login'));
+
+        async function init() {
+            try { user = await (await fetch('/api/me')).json(); } catch {}
+            const msg = $('apply-msg');
+            if (!user.loggedIn) {
+                msg.textContent = 'Log in with Discord to apply. The server address is revealed once you are whitelisted.';
+                return;
+            }
+            loginBtns.forEach(b => {
+                if (/Connect/.test(b.textContent)) b.classList.add('hidden');
+                else b.lastChild.textContent = ` Log out (${user.name})`;
+            });
+            if (user.whitelisted) {
+                $('server-ip').textContent = user.ip || 'Coming soon';
+                $('ip-label').textContent = `Java · Bedrock port ${user.bedrockPort}`;
+                msg.textContent = "You're whitelisted. The server address is at the top of the page.";
+            } else if (!user.inGuild) {
+                msg.innerHTML = `Join our <a class="text-emerald-400 underline" href="${DISCORD_INVITE}" target="_blank" rel="noopener">Discord server</a> first, then log in again.`;
+            } else {
+                msg.textContent = `Logged in as ${user.name}. Fill this in and our admins will review it.`;
+                $('apply-form').classList.remove('hidden');
+            }
+        }
+
+        $('apply-form').addEventListener('submit', async e => {
+            e.preventDefault();
+            const b = $('apply-btn');
+            b.disabled = true; b.textContent = 'Sending…';
+            try {
+                const r = await fetch('/api/apply', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ign: $('ign').value.trim(), about: $('about').value.trim() })
+                });
+                if (!r.ok) throw 0;
+                $('apply-form').classList.add('hidden');
+                $('apply-msg').textContent = "Application sent! You'll get a Discord ping once you're reviewed.";
+            } catch {
+                b.disabled = false; b.textContent = 'Submit application';
+                toast('Something went wrong, try again');
+            }
         });
 
-        // Copy IP Functionality
-        function copyIP() {
-            const ipText = document.getElementById('server-ip').innerText;
-            const toast = document.getElementById('toast');
-
-            // Fallback for iFrame restrictions as per constraints, using execCommand
-            const textArea = document.createElement("textarea");
-            textArea.value = ipText;
-            
-            // Avoid scrolling to bottom
-            textArea.style.top = "0";
-            textArea.style.left = "0";
-            textArea.style.position = "fixed";
-            
-            document.body.appendChild(textArea);
-            textArea.focus();
-            textArea.select();
-            
+        // Live status
+        async function status() {
+            const t = $('players-text'), pill = $('status-pill');
             try {
-                document.execCommand('copy');
-                // Show Toast
-                toast.classList.add('show');
-                
-                // Hide Toast after 3s
-                setTimeout(() => {
-                    toast.classList.remove('show');
-                }, 3000);
-            } catch (err) {
-                console.error('Fallback: Oops, unable to copy', err);
-            }
-            
-            document.body.removeChild(textArea);
+                const s = await (await fetch('/api/status')).json();
+                if (s.online) { t.textContent = `${s.players} / ${s.max} Players Online`; return; }
+            } catch {}
+            t.textContent = 'Server opening soon';
+            pill.querySelectorAll('.animate-ping').forEach(el => el.remove());
+            pill.querySelector('.bg-emerald-500').classList.replace('bg-emerald-500', 'bg-slate-500');
+            pill.classList.replace('border-emerald-500/30', 'border-white/10');
         }
+
+        // Nav highlight on scroll
+        const links = [...document.querySelectorAll('#navbar div.md\\:block a[href^="#"]')];
+        const io = new IntersectionObserver(es => es.forEach(en => {
+            if (!en.isIntersecting) return;
+            links.forEach(a => {
+                const on = a.getAttribute('href') === '#' + en.target.id;
+                a.classList.toggle('text-white', on);
+                a.classList.toggle('bg-white/5', on);
+                a.classList.toggle('text-slate-300', !on);
+            });
+        }), { rootMargin: '-45% 0px -50% 0px' });
+        ['home', 'whitelist', 'mods', 'gallery', 'support'].forEach(id => io.observe($(id)));
+
+        init(); status();
     </script>
 </body>
 </html>
