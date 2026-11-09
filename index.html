@@ -4,239 +4,503 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HartSMP | Fabric & Purpur Cross-Play</title>
-    <meta name="description" content="A premium Fabric & Purpur cross-play Minecraft experience. Seamless Bedrock integration, vanilla-tweaked economy, and a community built on trust.">
+    <meta name="description" content="HartSMP: a whitelisted Fabric &amp; Purpur Minecraft SMP with Java and Bedrock cross-play.">
+    <meta name="theme-color" content="#0b0f19">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="HartSMP | Fabric &amp; Purpur Cross-Play">
+    <meta property="og:description" content="HartSMP: a whitelisted Fabric &amp; Purpur Minecraft SMP with Java and Bedrock cross-play.">
+    <meta property="og:url" content="https://hartsmp.art">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%B1%3C/text%3E%3C/svg%3E">
     
-    <link rel="stylesheet" href="./input.css">
+    <!-- Fonts: Poppins for Headings, Inter for Body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+
+
+    <link rel="stylesheet" href="/tw.css">
 </head>
-<body class="bg-gray-950 text-gray-100 font-sans antialiased selection:bg-emerald-500 selection:text-white">
+<body class="bg-slate-950 text-slate-300 font-sans antialiased selection:bg-emerald-500/30 selection:text-emerald-200">
 
-    <!-- Navigation Bar -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-gray-950/80 backdrop-blur-md border-b border-gray-800/60">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <a href="#" class="flex items-center gap-3 group">
-                <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-500/20 transition-colors">
-                    <i class="ph ph-cube text-xl"></i>
+    <!-- Sticky Navbar -->
+    <nav class="fixed w-full z-50 transition-all duration-300 glass border-b-0" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-lg bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                        <i class="ph-fill ph-cube text-2xl"></i>
+                    </div>
+                    <span class="font-heading font-bold text-2xl text-white tracking-tight">Hart<span class="text-emerald-500">SMP</span></span>
                 </div>
-                <span class="text-xl font-bold tracking-tight text-white">Hart<span class="text-emerald-400">SMP</span></span>
-            </a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-1">
+                        <a href="#home" class="px-4 py-2 rounded-md text-sm font-medium text-white bg-white/5 hover:bg-white/10 transition-colors">Home</a>
+                        <a href="#whitelist" class="px-4 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Whitelist</a>
+                        <a href="#mods" class="px-4 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Mods</a>
+                        <a href="#gallery" class="px-4 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Gallery</a>
+                        <a href="#support" class="px-4 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Support</a>
+                    </div>
+                </div>
 
-            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
-                <a href="#home" class="hover:text-emerald-400 transition-colors">Home</a>
-                <a href="#whitelist" class="hover:text-emerald-400 transition-colors">Whitelist</a>
-                <a href="#mods" class="hover:text-emerald-400 transition-colors">Mods</a>
-                <a href="#gallery" class="hover:text-emerald-400 transition-colors">Gallery</a>
-                <a href="#support" class="hover:text-emerald-400 transition-colors">Support</a>
-            </nav>
+                <!-- Discord Login (Desktop) -->
+                <div class="hidden md:block">
+                    <button class="flex items-center gap-2 bg-discord hover:bg-discordHover text-white px-5 py-2.5 rounded-lg font-medium transition-all shadow-[0_0_15px_rgba(88,101,242,0.4)] hover:shadow-[0_0_25px_rgba(88,101,242,0.6)]">
+                        <i class="ph-fill ph-discord-logo text-xl"></i>
+                        Login with Discord
+                    </button>
+                </div>
 
-            <div class="hidden md:flex items-center gap-4" id="nav-auth">
-                <a href="/api/login?action=login" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#5865F2] hover:bg-[#4752C4] text-white font-medium text-sm transition-all shadow-lg shadow-indigo-500/20">
-                    <i class="ph ph-discord-logo text-lg"></i>
-                    <span>Login with Discord</span>
-                </a>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false" class="text-slate-300 hover:text-white focus:outline-none p-2 rounded-md bg-white/5">
+                        <i class="ph ph-list text-2xl"></i>
+                    </button>
+                </div>
             </div>
         </div>
-    </header>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden glass border-t border-white/5">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium text-white bg-white/10">Home</a>
+                <a href="#whitelist" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Whitelist</a>
+                <a href="#mods" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Mods</a>
+                <a href="#gallery" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Gallery</a>
+                <a href="#support" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Support</a>
+                <button class="w-full mt-4 flex items-center justify-center gap-2 bg-discord hover:bg-discordHover text-white px-5 py-3 rounded-lg font-medium transition-all">
+                    <i class="ph-fill ph-discord-logo text-xl"></i>
+                    Login with Discord
+                </button>
+            </div>
+        </div>
+    </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-        <div class="absolute inset-0 z-0">
-            <img src="./assets/hero.jpg" alt="Minecraft Castle Spawn" class="w-full h-full object-cover opacity-30 scale-105">
-            <div class="absolute inset-0 bg-gradient-to-b from-gray-950/60 via-gray-950/80 to-gray-950"></div>
-        </div>
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-hero-pattern bg-cover bg-center bg-fixed">
+        <!-- Accent Glows behind content -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-600/20 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-[30rem] h-[30rem] bg-amber-500/10 rounded-full blur-[150px] pointer-events-none"></div>
 
-        <div class="relative z-10 max-w-5xl mx-auto px-4 text-center py-20">
-            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold mb-6">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                <span id="server-status-badge">Checking Server Status...</span>
+        <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
+            
+            <!-- Online Status Pill -->
+            <div id="status-pill" class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-emerald-500/30 mb-8">
+                <span class="relative flex h-3 w-3">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                </span>
+                <span id="players-text" class="text-sm font-medium text-emerald-50">Checking server…</span>
             </div>
 
-            <h1 class="text-5xl sm:text-7xl font-extrabold tracking-tight text-white mb-6">
+            <h1 class="text-5xl md:text-7xl font-heading font-extrabold text-white tracking-tight leading-tight mb-6">
                 Craft Your Legacy.<br>
-                <span class="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">Together.</span>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-600">Together.</span>
             </h1>
-
-            <p class="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10">
-                A premium Fabric & Purpur cross-play experience. Seamless Bedrock integration, vanilla-tweaked economy, and a community built on trust.
+            
+            <p class="mt-4 max-w-2xl text-lg md:text-xl text-slate-300 mb-10">
+                A Fabric & Purpur SMP with Java and Bedrock cross-play, and a community built on trust.
             </p>
 
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="#whitelist" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-gray-950 font-bold transition-all shadow-xl shadow-emerald-500/20">
-                    <span>Apply for Whitelist</span>
-                    <i class="ph ph-arrow-right font-bold"></i>
-                </a>
-                <a href="https://discord.gg/REPLACE_ME" target="_blank" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-gray-900 hover:bg-gray-800 text-white font-semibold border border-gray-800 transition-all">
-                    <i class="ph ph-discord-logo text-lg text-indigo-400"></i>
-                    <span>Join Discord</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Whitelist Portal Section -->
-    <section id="whitelist" class="py-24 bg-gray-900/50 border-t border-b border-gray-800/60">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">Server Access & Whitelist</h2>
-                <p class="text-gray-400 max-w-lg mx-auto">Login with Discord to submit your Minecraft username or view connection details.</p>
-            </div>
-
-            <div id="whitelist-portal" class="bg-gray-900 border border-gray-800 rounded-2xl p-6 sm:p-8 shadow-2xl">
-                <!-- Dynamically populated via script -->
-                <div class="text-center py-12 space-y-4">
-                    <div class="w-16 h-16 bg-indigo-500/10 border border-indigo-500/20 rounded-2xl flex items-center justify-center mx-auto text-indigo-400 text-2xl">
-                        <i class="ph ph-lock-key"></i>
+            <!-- IP Copy Box -->
+            <div class="flex flex-col sm:flex-row items-center gap-4">
+                <div class="glass-card p-2 pr-4 rounded-xl flex items-center gap-4 group cursor-pointer hover:border-emerald-500/50 transition-all" onclick="copyIP()">
+                    <div class="bg-slate-900 rounded-lg px-4 py-3 flex items-center justify-center border border-white/5 group-hover:border-emerald-500/30 transition-colors">
+                        <i class="ph ph-copy text-xl text-emerald-400"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-white">Authentication Required</h3>
-                    <p class="text-gray-400 text-sm max-w-md mx-auto">Please connect with your Discord account to submit your whitelist application.</p>
-                    <div class="pt-4">
-                        <a href="/api/login?action=login" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#5865F2] hover:bg-[#4752C4] text-white font-medium text-sm transition-all shadow-lg">
-                            <i class="ph ph-discord-logo text-lg"></i>
-                            <span>Login with Discord</span>
-                        </a>
+                    <div class="text-left">
+                        <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold"><span id="ip-label">Server address</span></p>
+                        <p class="text-xl font-mono font-bold text-white" id="server-ip">Login to reveal</p>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Support / Ko-fi / GCash Section -->
-    <section id="support" class="py-24">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div>
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs font-semibold mb-6">
-                        <i class="ph ph-heart-fill"><span>Server Support</span></i>
-                    </div>
-                    <h2 class="text-3xl sm:text-4xl font-bold text-white mb-6">Keep the Lights On</h2>
-                    <p class="text-gray-400 mb-6">Our server runs 24/7 on dedicated hardware. We rely completely on community support to cover hosting and domain fees. No pay-to-win, just pure support.</p>
-                    
-                    <div class="space-y-4">
-                        <div class="flex items-start gap-4 p-4 rounded-xl bg-gray-900 border border-gray-800">
-                            <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400 font-bold shrink-0">₱</div>
-                            <div>
-                                <h4 class="text-white font-semibold">Local Payments (GCash / Maya)</h4>
-                                <p class="text-gray-400 text-sm">Scan your banking app or GCash QR to support locally without international card fees.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6">
-                    <iframe id='kofiframe' src='https://ko-fi.com/xhosh/?hidefeed=true&widget=true&embed=true' style='border:none;width:100%;padding:4px;background:transparent;' height='600' title='xhosh'></iframe>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Script to handle session check & dynamic form rendering -->
-    <script>
-        async function checkAuth() {
-            try {
-                const res = await fetch('/api/me');
-                const data = await res.json();
                 
-                const portal = document.getElementById('whitelist-portal');
-                const navAuth = document.getElementById('nav-auth');
+                <a href="#whitelist" class="px-8 py-4 rounded-xl font-semibold bg-white text-slate-950 hover:bg-slate-200 transition-colors flex items-center gap-2">
+                    Apply Now <i class="ph-bold ph-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+            <i class="ph ph-caret-down text-3xl text-slate-500"></i>
+        </div>
+    </section>
 
-                if (data.loggedIn) {
-                    navAuth.innerHTML = `
-                        <div class="flex items-center gap-3">
-                            <span class="text-sm text-gray-300">Hi, <strong class="text-white">${data.name}</strong></span>
-                            <a href="/api/logout?action=logout" class="px-3 py-1.5 rounded-lg bg-gray-800 hover:bg-gray-700 text-xs font-medium text-gray-300 transition-colors">Logout</a>
+    <!-- Whitelist Process -->
+    <section id="whitelist" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-heading font-bold text-white mb-4">Join the Community</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">We use a Discord-linked whitelisting system to keep our server safe from griefers and ensure a high-quality experience for everyone.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="glass-card rounded-2xl p-8 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+                    <div class="absolute top-0 right-0 -mr-4 -mt-4 text-9xl font-heading font-black text-white/[0.02] group-hover:text-white/[0.05] transition-colors pointer-events-none">1</div>
+                    <div class="w-14 h-14 rounded-xl bg-discord/20 text-discord flex items-center justify-center mb-6">
+                        <i class="ph-fill ph-discord-logo text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Login with Discord</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">Authenticate your Discord account securely. We use this to verify your identity and sync your in-game roles automatically.</p>
+                    <button class="w-full py-3 bg-discord/10 hover:bg-discord hover:text-white text-discord rounded-lg font-medium transition-colors border border-discord/30 hover:border-discord">
+                        Connect Account
+                    </button>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="glass-card rounded-2xl p-8 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+                    <div class="absolute top-0 right-0 -mr-4 -mt-4 text-9xl font-heading font-black text-white/[0.02] group-hover:text-white/[0.05] transition-colors pointer-events-none">2</div>
+                    <div class="w-14 h-14 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center mb-6">
+                        <i class="ph-fill ph-scroll text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Accept the Rules</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Read through our community guidelines. We have a strict zero-tolerance policy for unconsented PvP, stealing, and griefing.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="glass-card rounded-2xl p-8 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+                    <div class="absolute top-0 right-0 -mr-4 -mt-4 text-9xl font-heading font-black text-white/[0.02] group-hover:text-white/[0.05] transition-colors pointer-events-none">3</div>
+                    <div class="w-14 h-14 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center mb-6">
+                        <i class="ph-fill ph-paper-plane-tilt text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Submit Application</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Enter your Minecraft IGN and a brief intro. Our admin team will review it and you'll get a Discord ping once whitelisted.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Whitelist Application -->
+    <section id="apply" class="py-20 border-t border-white/5">
+        <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card rounded-2xl p-8">
+                <h2 class="text-2xl font-heading font-bold text-white mb-2">Whitelist Application</h2>
+                <p id="apply-msg" class="text-slate-400 mb-6">Checking your login…</p>
+                <form id="apply-form" class="hidden space-y-4">
+                    <div>
+                        <label for="ign" class="block text-sm text-slate-300 mb-1">Minecraft username</label>
+                        <input id="ign" required maxlength="17" pattern="\.?[A-Za-z0-9_ ]{3,16}" placeholder="Steve (Bedrock: .Steve)" class="w-full rounded-lg bg-slate-900 border border-white/10 px-4 py-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label for="about" class="block text-sm text-slate-300 mb-1">Tell us about yourself</label>
+                        <textarea id="about" required maxlength="600" rows="4" class="w-full rounded-lg bg-slate-900 border border-white/10 px-4 py-2.5 text-white focus:border-emerald-500 focus:outline-none"></textarea>
+                    </div>
+                    <!-- Edit these to match your real rules -->
+                    <ul class="text-sm text-slate-400 list-disc pl-5 space-y-1">
+                        <li>No unconsented PvP</li>
+                        <li>No stealing</li>
+                        <li>No griefing</li>
+                    </ul>
+                    <label class="flex items-start gap-2 text-sm text-slate-300">
+                        <input id="rules" type="checkbox" required class="mt-1 accent-emerald-500"> I've read and accept the rules.
+                    </label>
+                    <button type="submit" id="apply-btn" class="w-full rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold py-3 transition-colors">Submit application</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mods & Downloads -->
+    <section id="mods" class="py-24 bg-slate-900/50 relative border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-heading font-bold text-white mb-4">Client Connections</h2>
+                    <p class="text-slate-400 max-w-xl">Whether you play on Java or Bedrock, we've got you covered. Here are our recommended client mods for the best experience.</p>
+                </div>
+                <div class="flex gap-3">
+                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-white/10 text-white border border-white/10">Fabric · version TBA</span>
+                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-white/10 text-white border border-white/10">Purpur</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Xaero's Minimap Card -->
+                <div class="bg-slate-850 p-6 rounded-2xl border border-white/5 hover:border-blue-500/30 transition-colors">
+                    <div class="flex items-center gap-4 mb-4">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='8' fill='%231e293b'/%3E%3Ctext x='24' y='32' font-family='sans-serif' font-size='24' font-weight='700' text-anchor='middle' fill='%233b82f6'%3EX%3C/text%3E%3C/svg%3E" class="rounded-lg shadow-md" alt="Xaero Icon">
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Xaero's Minimap</h4>
+                            <p class="text-xs text-slate-500 font-medium">Navigation</p>
                         </div>
-                    `;
+                    </div>
+                    <p class="text-sm text-slate-400 mb-6">Keep track of your surroundings, mark waypoints, and never lose your base again.</p>
+                    <a href="https://modrinth.com/mod/xaeros-minimap" target="_blank" class="inline-flex items-center gap-2 text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors">
+                        Download via Modrinth <i class="ph-bold ph-download-simple"></i>
+                    </a>
+                </div>
 
-                    portal.innerHTML = `
-                        <div class="space-y-6">
-                            <div class="flex flex-col sm:flex-row items-center justify-between pb-6 border-b border-gray-800 gap-4">
-                                <div>
-                                    <h3 class="text-xl font-bold text-white">Welcome, ${data.name}!</h3>
-                                    <p class="text-gray-400 text-sm">Submit your Minecraft IGN below to apply for the whitelist.</p>
-                                </div>
-                                <span class="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-medium">Logged in via Discord</span>
-                            </div>
-
-                            <form id="whitelist-form" class="space-y-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-300 mb-2">Minecraft IGN (Username)</label>
-                                    <input type="text" id="ign-input" required placeholder="e.g. Steve" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-300 mb-2">Short Introduction / Why do you want to join?</label>
-                                    <textarea id="about-input" rows="3" required placeholder="Tell us a bit about yourself..." class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500"></textarea>
-                                </div>
-                                <button type="submit" class="w-full py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-gray-950 font-bold transition-all shadow-lg">Submit Application</button>
-                            </form>
-                            <div id="form-response" class="hidden text-center p-4 rounded-xl"></div>
-
-                            <div class="mt-8 pt-6 border-t border-gray-800">
-                                <h4 class="text-sm font-semibold text-gray-300 mb-3">Server Connection Details (Unlocked)</h4>
-                                <div class="flex items-center justify-between bg-gray-950 border border-gray-800 rounded-xl p-4">
-                                    <div>
-                                        <p class="text-xs text-gray-500 uppercase font-mono">Server Address</p>
-                                        <p class="text-white font-mono font-bold">${data.ip}</p>
-                                    </div>
-                                    <button onclick="navigator.clipboard.writeText('${data.ip}'); alert('Copied IP!');" class="px-4 py-2 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 text-sm font-medium transition-colors">Copy IP</button>
-                                </div>
-                            </div>
+                <!-- Sodium Card -->
+                <div class="bg-slate-850 p-6 rounded-2xl border border-white/5 hover:border-emerald-500/30 transition-colors">
+                    <div class="flex items-center gap-4 mb-4">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='8' fill='%231e293b'/%3E%3Ctext x='24' y='32' font-family='sans-serif' font-size='24' font-weight='700' text-anchor='middle' fill='%2310b981'%3ES%3C/text%3E%3C/svg%3E" class="rounded-lg shadow-md" alt="Sodium Icon">
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Sodium</h4>
+                            <p class="text-xs text-slate-500 font-medium">Fabric Performance</p>
                         </div>
-                    `;
+                    </div>
+                    <p class="text-sm text-slate-400 mb-6">Highly recommended for Java players. Dramatically improves framerates and reduces micro-stutters better than Optifine.</p>
+                    <a href="https://modrinth.com/mod/sodium" target="_blank" class="inline-flex items-center gap-2 text-sm font-medium text-emerald-400 hover:text-emerald-300 transition-colors">
+                        Download via Modrinth <i class="ph-bold ph-download-simple"></i>
+                    </a>
+                </div>
 
-                    document.getElementById('whitelist-form').addEventListener('submit', async (e) => {
-                        e.preventDefault();
-                        const ign = document.getElementById('ign-input').value;
-                        const about = document.getElementById('about-input').value;
-                        const resDiv = document.getElementById('form-response');
+                <!-- Iris Card -->
+                <div class="bg-slate-850 p-6 rounded-2xl border border-white/5 hover:border-purple-500/30 transition-colors">
+                    <div class="flex items-center gap-4 mb-4">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='8' fill='%231e293b'/%3E%3Ctext x='24' y='32' font-family='sans-serif' font-size='24' font-weight='700' text-anchor='middle' fill='%23a855f7'%3EI%3C/text%3E%3C/svg%3E" class="rounded-lg shadow-md" alt="Iris Icon">
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Iris Shaders</h4>
+                            <p class="text-xs text-slate-500 font-medium">Fabric Visuals</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-400 mb-6">Want the game to look like our screenshots? Install Iris alongside Sodium to run modern shader packs flawlessly.</p>
+                    <a href="https://modrinth.com/mod/iris" target="_blank" class="inline-flex items-center gap-2 text-sm font-medium text-purple-400 hover:text-purple-300 transition-colors">
+                        Download via Modrinth <i class="ph-bold ph-download-simple"></i>
+                    </a>
+                </div>
 
-                        resDiv.className = "text-center p-4 rounded-xl bg-gray-800 text-gray-300";
-                        resDiv.textContent = "Submitting application...";
-                        resDiv.classList.remove('hidden');
+            </div>
+        </div>
+    </section>
 
-                        try {
-                            const response = await fetch('/api/apply?action=apply', {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify({ ign, about })
-                            });
-                            if (response.ok) {
-                                resDiv.className = "text-center p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-medium";
-                                resDiv.textContent = "Application submitted successfully! Our staff will review it.";
-                                document.getElementById('whitelist-form').reset();
-                            } else {
-                                const err = await response.json();
-                                resDiv.className = "text-center p-4 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 font-medium";
-                                resDiv.textContent = err.error || "Failed to submit application.";
-                            }
-                        } catch (err) {
-                            resDiv.className = "text-center p-4 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 font-medium";
-                            resDiv.textContent = "Network error. Please try again later.";
-                        }
-                    });
-                }
-            } catch (e) {
-                console.error("Auth check failed", e);
+    <!-- Past Servers Gallery (Masonry) -->
+    <section id="gallery" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-heading font-bold text-white mb-4">Our History</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">A look back at the incredible builds and memories from past seasons.</p>
+            </div>
+
+            <!-- CSS Multi-column Masonry -->
+            <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
+                <!-- Image Item -->
+                <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-slate-900 border border-white/5">
+                    <div class="img-gradient relative h-full w-full">
+                        <img src="assets/gallery/1.jpg" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%231e293b'/%3E%3Ctext x='400' y='310' font-family='sans-serif' font-size='28' text-anchor='middle' fill='%2364748b'%3EScreenshot coming soon%3C/text%3E%3C/svg%3E'" alt="Minecraft Castle Build" class="w-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <div class="absolute bottom-0 left-0 p-6 z-10">
+                        <p class="text-emerald-400 text-xs font-bold uppercase tracking-wider mb-1">Season 3</p>
+                        <h3 class="text-white font-medium text-lg">The Grand Citadel</h3>
+                    </div>
+                </div>
+
+                <!-- Image Item -->
+                <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-slate-900 border border-white/5">
+                    <div class="img-gradient relative h-full w-full">
+                        <img src="assets/gallery/2.jpg" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%231e293b'/%3E%3Ctext x='400' y='310' font-family='sans-serif' font-size='28' text-anchor='middle' fill='%2364748b'%3EScreenshot coming soon%3C/text%3E%3C/svg%3E'" alt="Server Spawn" class="w-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <div class="absolute bottom-0 left-0 p-6 z-10">
+                        <p class="text-emerald-400 text-xs font-bold uppercase tracking-wider mb-1">Season 4</p>
+                        <h3 class="text-white font-medium text-lg">Market District</h3>
+                    </div>
+                </div>
+
+                <!-- Image Item -->
+                <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-slate-900 border border-white/5">
+                    <div class="img-gradient relative h-full w-full">
+                        <img src="assets/gallery/3.jpg" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%231e293b'/%3E%3Ctext x='400' y='310' font-family='sans-serif' font-size='28' text-anchor='middle' fill='%2364748b'%3EScreenshot coming soon%3C/text%3E%3C/svg%3E'" alt="Redstone Contraption" class="w-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <div class="absolute bottom-0 left-0 p-6 z-10">
+                        <p class="text-emerald-400 text-xs font-bold uppercase tracking-wider mb-1">Tech Hub</p>
+                        <h3 class="text-white font-medium text-lg">Industrial Sector</h3>
+                    </div>
+                </div>
+
+                <!-- Image Item -->
+                <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-slate-900 border border-white/5">
+                    <div class="img-gradient relative h-full w-full">
+                        <img src="assets/gallery/4.jpg" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%231e293b'/%3E%3Ctext x='400' y='310' font-family='sans-serif' font-size='28' text-anchor='middle' fill='%2364748b'%3EScreenshot coming soon%3C/text%3E%3C/svg%3E'" alt="Nighttime City" class="w-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <div class="absolute bottom-0 left-0 p-6 z-10">
+                        <p class="text-emerald-400 text-xs font-bold uppercase tracking-wider mb-1">Season 2</p>
+                        <h3 class="text-white font-medium text-lg">Neon Heights</h3>
+                    </div>
+                </div>
+                
+                <!-- Image Item -->
+                <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-slate-900 border border-white/5">
+                    <div class="img-gradient relative h-full w-full">
+                        <img src="assets/gallery/5.jpg" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%231e293b'/%3E%3Ctext x='400' y='310' font-family='sans-serif' font-size='28' text-anchor='middle' fill='%2364748b'%3EScreenshot coming soon%3C/text%3E%3C/svg%3E'" alt="Underground Base" class="w-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <div class="absolute bottom-0 left-0 p-6 z-10">
+                        <p class="text-emerald-400 text-xs font-bold uppercase tracking-wider mb-1">Community Project</p>
+                        <h3 class="text-white font-medium text-lg">Dwarven Halls</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Us (Ko-fi Style) -->
+    <section id="support" class="py-24 bg-slate-900/30 border-t border-white/5">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card rounded-3xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-10">
+                <div class="md:w-1/2">
+                    <div class="w-12 h-12 bg-rose-500/20 text-rose-500 rounded-full flex items-center justify-center mb-6">
+                        <i class="ph-fill ph-heart text-2xl"></i>
+                    </div>
+                    <h2 class="text-3xl font-heading font-bold text-white mb-4">Keep the Lights On</h2>
+                    <p class="text-slate-400 mb-6">Hosting isn't free. We rely on community donations to cover monthly hosting and domain fees. No pay-to-win, just pure support.</p>
+                    <div class="glass-card rounded-2xl p-4 flex items-center gap-4">
+                        <img src="assets/gcash-qr.png" alt="GCash QR Ph code" class="w-24 h-24 rounded-lg bg-white object-contain" onerror="this.style.display='none'">
+                        <div>
+                            <h3 class="font-heading font-semibold text-white">GCash / Maya</h3>
+                            <p class="text-sm text-slate-400">Scan with GCash, Maya or any bank app, then open a ticket in our Discord with the receipt so we can give you the Supporter role.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2 w-full flex justify-center">
+                    <!-- Embedded Ko-fi Widget -->
+                    <iframe id='kofiframe' src='https://ko-fi.com/xhosh/?hidefeed=true&widget=true&embed=true' style='border:none;width:100%;padding:4px;background:transparent;border-radius:0.75rem;' height='712' title='xhosh'></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5 bg-slate-950 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-2">
+                <i class="ph-fill ph-cube text-xl text-emerald-500"></i>
+                <span class="font-heading font-bold text-lg text-white">HartSMP</span>
+            </div>
+            
+            <p class="text-sm text-slate-500 text-center md:text-left">
+                Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.
+            </p>
+
+            <div class="flex gap-4">
+                <a href="https://discord.gg/REPLACE_ME" target="_blank" rel="noopener" aria-label="Discord" class="text-slate-500 hover:text-white transition-colors">
+                    <i class="ph-fill ph-discord-logo text-2xl"></i>
+                </a>
+                <a href="https://github.com/Hoshxx/hartsmp-web" target="_blank" rel="noopener" aria-label="GitHub" class="text-slate-500 hover:text-white transition-colors">
+                    <i class="ph-fill ph-github-logo text-2xl"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom Toast Notification -->
+    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 bg-slate-800 text-white px-5 py-3 rounded-full border border-emerald-500/30 shadow-2xl shadow-emerald-500/20">
+        <div class="bg-emerald-500/20 text-emerald-400 rounded-full p-1">
+            <i class="ph-bold ph-check text-sm"></i>
+        </div>
+        <span class="text-sm font-medium">IP copied to clipboard!</span>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        const DISCORD_INVITE = 'https://discord.gg/REPLACE_ME';
+        const $ = id => document.getElementById(id);
+        let user = { loggedIn: false };
+
+        // Mobile menu
+        const menu = $('mobile-menu'), mbtn = $('mobile-menu-btn');
+        mbtn.addEventListener('click', () => mbtn.setAttribute('aria-expanded', String(!menu.classList.toggle('hidden'))));
+
+        function toast(msg) {
+            const t = $('toast');
+            t.querySelector('span').textContent = msg;
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 3000);
+        }
+
+        // Copy IP (only works once the server has revealed it)
+        async function copyIP() {
+            if (!user.loggedIn) return location.href = '/api/login';
+            if (!user.whitelisted) { $('apply').scrollIntoView({ behavior: 'smooth' }); return toast('Get whitelisted to see the address'); }
+            if (!user.ip) return toast('Address not announced yet');
+            try { await navigator.clipboard.writeText(user.ip); }
+            catch {
+                const ta = document.createElement('textarea');
+                ta.value = user.ip; document.body.appendChild(ta); ta.select();
+                try { document.execCommand('copy'); } catch {}
+                ta.remove();
+            }
+            toast('IP copied to clipboard!');
+        }
+
+        // Login buttons
+        const loginBtns = [...document.querySelectorAll('button')].filter(b => /Discord|Connect Account/.test(b.textContent));
+        loginBtns.forEach(b => b.addEventListener('click', () => location.href = user.loggedIn ? '/api/logout' : '/api/login'));
+
+        async function init() {
+            try { user = await (await fetch('/api/me')).json(); } catch {}
+            const msg = $('apply-msg');
+            if (!user.loggedIn) {
+                msg.textContent = 'Log in with Discord to apply. The server address is revealed once you are whitelisted.';
+                return;
+            }
+            loginBtns.forEach(b => {
+                if (/Connect/.test(b.textContent)) b.classList.add('hidden');
+                else b.lastChild.textContent = ` Log out (${user.name})`;
+            });
+            if (user.whitelisted) {
+                $('server-ip').textContent = user.ip || 'Coming soon';
+                $('ip-label').textContent = `Java · Bedrock port ${user.bedrockPort}`;
+                msg.textContent = "You're whitelisted. The server address is at the top of the page.";
+            } else if (!user.inGuild) {
+                msg.innerHTML = `Join our <a class="text-emerald-400 underline" href="${DISCORD_INVITE}" target="_blank" rel="noopener">Discord server</a> first, then log in again.`;
+            } else {
+                msg.textContent = `Logged in as ${user.name}. Fill this in and our admins will review it.`;
+                $('apply-form').classList.remove('hidden');
             }
         }
 
-        // Fetch live server status on load
-        async function fetchStatus() {
+        $('apply-form').addEventListener('submit', async e => {
+            e.preventDefault();
+            const b = $('apply-btn');
+            b.disabled = true; b.textContent = 'Sending…';
             try {
-                const res = await fetch('/api/status?action=status');
-                const data = await res.json();
-                const badge = document.getElementById('server-status-badge');
-                if (data.online) {
-                    badge.textContent = `${data.players} / ${data.max} Players Online`;
-                } else {
-                    badge.textContent = "Server Opening Soon";
-                }
+                const r = await fetch('/api/apply', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ign: $('ign').value.trim(), about: $('about').value.trim() })
+                });
+                if (!r.ok) throw 0;
+                $('apply-form').classList.add('hidden');
+                $('apply-msg').textContent = "Application sent! You'll get a Discord ping once you're reviewed.";
             } catch {
-                document.getElementById('server-status-badge').textContent = "Server Opening Soon";
+                b.disabled = false; b.textContent = 'Submit application';
+                toast('Something went wrong, try again');
             }
+        });
+
+        // Live status
+        async function status() {
+            const t = $('players-text'), pill = $('status-pill');
+            try {
+                const s = await (await fetch('/api/status')).json();
+                if (s.online) { t.textContent = `${s.players} / ${s.max} Players Online`; return; }
+            } catch {}
+            t.textContent = 'Server opening soon';
+            pill.querySelectorAll('.animate-ping').forEach(el => el.remove());
+            pill.querySelector('.bg-emerald-500').classList.replace('bg-emerald-500', 'bg-slate-500');
+            pill.classList.replace('border-emerald-500/30', 'border-white/10');
         }
 
-        checkAuth();
-        fetchStatus();
+        // Nav highlight on scroll
+        const links = [...document.querySelectorAll('#navbar div.md\\:block a[href^="#"]')];
+        const io = new IntersectionObserver(es => es.forEach(en => {
+            if (!en.isIntersecting) return;
+            links.forEach(a => {
+                const on = a.getAttribute('href') === '#' + en.target.id;
+                a.classList.toggle('text-white', on);
+                a.classList.toggle('bg-white/5', on);
+                a.classList.toggle('text-slate-300', !on);
+            });
+        }), { rootMargin: '-45% 0px -50% 0px' });
+        ['home', 'whitelist', 'mods', 'gallery', 'support'].forEach(id => io.observe($(id)));
+
+        init(); status();
     </script>
 </body>
 </html>
