@@ -1,0 +1,9 @@
+{
+  "name": "hartsmp-web",
+  "private": true,
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "build": "mkdir -p public && tailwindcss -c tailwind.config.js -i input.css -o public/tw.css --minify && cp index.html public/ && (cp -r assets public/ || true)"
+  },
+  "devDependencies": { "tailwindcss": "3.4.17" }
+}
