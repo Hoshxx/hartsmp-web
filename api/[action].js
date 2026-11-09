@@ -52,7 +52,7 @@ const routes = {
     const d = {
       id: u.id, name: u.global_name || u.username,
       inGuild: true,
-      whitelisted: true,
+      whitelisted: false,
       exp: Date.now() + 864e5, // 24h
     };
     const p = Buffer.from(JSON.stringify(d)).toString('base64url');
@@ -66,8 +66,8 @@ const routes = {
     const s = readSession(req);
     if (!s) return res.json({ loggedIn: false });
     res.json({
-      loggedIn: true, name: s.name, inGuild: true, whitelisted: true,
-      ip: E.SERVER_IP, bedrockPort: E.BEDROCK_PORT || '19132',
+      loggedIn: true, name: s.name, inGuild: s.inGuild, whitelisted: s.whitelisted,
+      ...(s.whitelisted && { ip: E.SERVER_IP, bedrockPort: E.BEDROCK_PORT || '19132' }),
     });
   },
 
