@@ -28,7 +28,7 @@ const routes = {
     setCookie(res, 'st', state, 600);
     const q = new URLSearchParams({
       client_id: E.DISCORD_CLIENT_ID, response_type: 'code', state,
-      scope: 'identify', // Minimized scope since we aren't checking guild roles anymore
+      scope: 'identify',
       redirect_uri: E.SITE_URL + '/api/callback',
     });
     res.redirect('https://discord.com/oauth2/authorize?' + q);
@@ -49,7 +49,6 @@ const routes = {
 
     const u = await discord('/users/@me', t.access_token).then(r => r.json());
     
-    // Bypassed role/guild checks: Everyone logging in is marked as whitelisted/inGuild for direct IP viewing
     const d = {
       id: u.id, name: u.global_name || u.username,
       inGuild: true,
@@ -87,12 +86,56 @@ const routes = {
   },
 
   async apply(req, res) {
-    // Disabled since you are managing applications/whitelisting manually
-    res.status(501).json({ error: 'Not implemented' });
+    if (req.method !== 'POST') return res.status(405).end();
+    const s = readSession(req);
+    if (!s) return res.status(401).json({ error: 'Unauthorized' });
+    
+    let body = req.body;
+    if (typeof body === 'string') {
+      try { body = JSON.parse(body); } catch { body = {}; }
+    }
+    const { ign, about } = body || {};
+    
+    if (!/^\.?[A-Za-z0-9_ ]{3,16}$/.test(ign || '') || !about || about.length > 600) {
+      return res.status(400).json({ error: 'Invalid input (Check IGN or intro length)' });
+    }
+    
+    if (!E.WEBHOOK_URL || E.WEBHOOK_URL === 'https://disabled') {
+      return res.status(500).json({ error: 'Webhook not configured' });
+    }
+
+    const r = await fetch(E.WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        allowed_mentions: { parse: [] },
+        embeds: [{
+          title: '📝 New Whitelist Application', color: 0x10b981,
+          fields: [
+            { name: 'Discord', value: `<@${s.id}> (${s.name})`, inline: true },
+            { name: 'Minecraft IGN', value: ign, inline: true },
+            { name: 'About / Intro', value: about },
+          ],
+          timestamp: new Date().toISOString()
+        }],
+      }),
+    });
+    res.status(r.ok ? 200 : 502).json({ ok: r.ok });
   },
 };
 
 module.exports = async (req, res) => {
+  if (req.method === 'POST' && !req.body) {
+    await new Promise(resolve => {
+      let data = '';
+      req.on('data', chunk => data += chunk);
+      req.on('end', () => {
+        try { req.body = JSON.parse(data); } catch { req.body = data; }
+        resolve();
+      });
+    });
+  }
+
   const name = req.query.action;
   if (!Object.hasOwn(routes, name)) return res.status(404).end();
   try { await routes[name](req, res); }
