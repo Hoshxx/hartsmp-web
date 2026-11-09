@@ -28,7 +28,7 @@ const routes = {
     setCookie(res, 'st', state, 600);
     const q = new URLSearchParams({
       client_id: E.DISCORD_CLIENT_ID, response_type: 'code', state,
-      scope: 'identify',
+      scope: 'identify guilds.members.read', // Required scope to read server roles
       redirect_uri: E.SITE_URL + '/api/callback',
     });
     res.redirect('https://discord.com/oauth2/authorize?' + q);
@@ -49,10 +49,27 @@ const routes = {
 
     const u = await discord('/users/@me', t.access_token).then(r => r.json());
     
+    // Check guild membership and whitelist role
+    let inGuild = false;
+    let whitelisted = false;
+
+    if (E.DISCORD_GUILD_ID) {
+      const m = await discord(`/users/@me/guilds/${E.DISCORD_GUILD_ID}/member`, t.access_token);
+      if (m.ok) {
+        inGuild = true;
+        const member = await m.json();
+        // Target your explicit Whitelist Role ID
+        const targetRole = E.WHITELIST_ROLE_ID || '1569402969902809189';
+        if (member.roles && member.roles.includes(targetRole)) {
+          whitelisted = true;
+        }
+      }
+    }
+    
     const d = {
       id: u.id, name: u.global_name || u.username,
-      inGuild: true,
-      whitelisted: false,
+      inGuild,
+      whitelisted,
       exp: Date.now() + 864e5, // 24h
     };
     const p = Buffer.from(JSON.stringify(d)).toString('base64url');
@@ -136,7 +153,12 @@ module.exports = async (req, res) => {
     });
   }
 
-  const name = req.query.action;
+  let name = req.query.action;
+  if (!name) {
+    const parts = req.url.split('?')[0].split('/');
+    name = parts[parts.length - 1];
+  }
+
   if (!Object.hasOwn(routes, name)) return res.status(404).end();
   try { await routes[name](req, res); }
   catch (e) { console.error(e); res.status(500).json({ error: 'server' }); }
