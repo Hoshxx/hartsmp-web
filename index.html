@@ -20,11 +20,10 @@
     <!-- Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
 
-
     <link rel="stylesheet" href="/tw.css">
 </head>
-<!-- Added overflow-x-hidden here -->
-<body class="bg-slate-950 text-slate-300 font-sans antialiased selection:bg-emerald-500/30 selection:text-emerald-200 overflow-x-hidden">
+<!-- Changed overflow-x-hidden to overflow-x-clip to restore smooth scrolling -->
+<body class="bg-slate-950 text-slate-300 font-sans antialiased selection:bg-emerald-500/30 selection:text-emerald-200 overflow-x-clip">
 
     <!-- Sticky Navbar -->
     <nav class="fixed w-full z-50 transition-all duration-300 glass border-b-0" id="navbar">
@@ -49,6 +48,8 @@
                         <a href="#mods" class="px-4 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Mods</a>
                         <a href="#gallery" class="px-4 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Gallery</a>
                         <a href="#support" class="px-4 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Support</a>
+                        <!-- Added Live Map Link -->
+                        <a href="/map.html" class="px-4 py-2 rounded-md text-sm font-medium text-pink-400 hover:text-pink-300 hover:bg-white/5 transition-colors flex items-center gap-1"><i class="ph-bold ph-map-trifold"></i> Map</a>
                     </div>
                 </div>
 
@@ -77,6 +78,8 @@
                 <a href="#mods" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Mods</a>
                 <a href="#gallery" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Gallery</a>
                 <a href="#support" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Support</a>
+                <!-- Added Live Map Link to Mobile Menu -->
+                <a href="/map.html" class="flex items-center gap-2 px-3 py-2 rounded-md text-base font-medium text-pink-400 hover:text-pink-300 hover:bg-white/5"><i class="ph-bold ph-map-trifold"></i> Live Map</a>
                 <button class="w-full mt-4 flex items-center justify-center gap-2 bg-discord hover:bg-discordHover text-white px-5 py-3 rounded-lg font-medium transition-all">
                     <i class="ph-fill ph-discord-logo text-xl"></i>
                     Login with Discord
