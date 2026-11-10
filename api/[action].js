@@ -80,9 +80,10 @@ const routes = {
 
   async status(req, res) {
     res.setHeader('Cache-Control', 's-maxage=60');
-    if (!E.SERVER_IP) return res.json({ online: false });
+    const addr = E.STATUS_ADDRESS || E.SERVER_IP; // include the port if it isn't 25565, e.g. host:25567
+    if (!addr) return res.json({ online: false });
     try {
-      const s = await fetch('https://api.mcsrvstat.us/3/' + E.SERVER_IP).then(r => r.json());
+      const s = await fetch('https://api.mcsrvstat.us/3/' + addr).then(r => r.json());
       res.json({ online: !!s.online, players: s.players?.online || 0, max: s.players?.max || 0 });
     } catch { res.json({ online: false }); }
   },
