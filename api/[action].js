@@ -28,7 +28,7 @@ const routes = {
     setCookie(res, 'st', state, 600);
     const q = new URLSearchParams({
       client_id: E.DISCORD_CLIENT_ID, response_type: 'code', state,
-      scope: 'identify guilds.members.read', // Required scope to read server roles
+      scope: 'identify guilds.members.read',
       redirect_uri: E.SITE_URL + '/api/callback',
     });
     res.redirect('https://discord.com/oauth2/authorize?' + q);
@@ -48,29 +48,13 @@ const routes = {
     if (!t.access_token) return res.redirect('/?login=failed');
 
     const u = await discord('/users/@me', t.access_token).then(r => r.json());
-    
-    // Check guild membership and whitelist role
-    let inGuild = false;
-    let whitelisted = false;
-
-    if (E.DISCORD_GUILD_ID) {
-      const m = await discord(`/users/@me/guilds/${E.DISCORD_GUILD_ID}/member`, t.access_token);
-      if (m.ok) {
-        inGuild = true;
-        const member = await m.json();
-        // Target your explicit Whitelist Role ID
-        const targetRole = E.WHITELIST_ROLE_ID || '1569402969902809189';
-        if (member.roles && member.roles.includes(targetRole)) {
-          whitelisted = true;
-        }
-      }
-    }
-    
+    const m = await discord(`/users/@me/guilds/${E.DISCORD_GUILD_ID}/member`, t.access_token);
+    const member = m.ok ? await m.json() : null;
     const d = {
       id: u.id, name: u.global_name || u.username,
-      inGuild,
-      whitelisted,
-      exp: Date.now() + 864e5, // 24h
+      inGuild: !!member,
+      whitelisted: !!member && member.roles.includes(E.WHITELIST_ROLE_ID),
+      exp: Date.now() + 864e5, // 24h; log in again to refresh role status
     };
     const p = Buffer.from(JSON.stringify(d)).toString('base64url');
     setCookie(res, 'sess', `${p}.${sign(p)}`, 86400);
@@ -84,6 +68,7 @@ const routes = {
     if (!s) return res.json({ loggedIn: false });
     res.json({
       loggedIn: true, name: s.name, inGuild: s.inGuild, whitelisted: s.whitelisted,
+      // The address is only ever sent to whitelisted members
       ...(s.whitelisted && { ip: E.SERVER_IP, bedrockPort: E.BEDROCK_PORT || '19132' }),
     });
   },
@@ -102,38 +87,41 @@ const routes = {
     } catch { res.json({ online: false }); }
   },
 
+  // Proxies BlueMap through Vercel: HTTPS for the browser, login required, server IP stays in an env var
+  async bluemap(req, res) {
+    const s = readSession(req);
+    if (!s || !s.whitelisted) return res.status(401).send('Whitelisted members only');
+    if (req.method !== 'GET' && req.method !== 'HEAD') return res.status(405).end();
+    const path = [].concat(req.query.path || []).join('/').replace(/^\/+/, '');
+    if (path.split('/').includes('..')) return res.status(400).end();
+    const u = new URL(req.url, 'http://x');
+    ['action', 'path'].forEach(k => u.searchParams.delete(k));
+    const target = E.BLUEMAP_ORIGIN.replace(/\/$/, '') + '/' + path + u.search;
+    const r = await fetch(target, { signal: AbortSignal.timeout(10000) }).catch(() => null);
+    if (!r) return res.status(502).send('Map server unreachable');
+    res.setHeader('Content-Type', r.headers.get('content-type') || 'application/octet-stream');
+    res.setHeader('Cache-Control', 'private, max-age=30');
+    res.status(r.status).send(Buffer.from(await r.arrayBuffer()));
+  },
+
   async apply(req, res) {
     if (req.method !== 'POST') return res.status(405).end();
     const s = readSession(req);
-    if (!s) return res.status(401).json({ error: 'Unauthorized' });
-    
-    let body = req.body;
-    if (typeof body === 'string') {
-      try { body = JSON.parse(body); } catch { body = {}; }
-    }
-    const { ign, about } = body || {};
-    
-    if (!/^\.?[A-Za-z0-9_ ]{3,16}$/.test(ign || '') || !about || about.length > 600) {
-      return res.status(400).json({ error: 'Invalid input (Check IGN or intro length)' });
-    }
-    
-    if (!E.WEBHOOK_URL || E.WEBHOOK_URL === 'https://disabled') {
-      return res.status(500).json({ error: 'Webhook not configured' });
-    }
-
+    if (!s || !s.inGuild) return res.status(401).end();
+    const { ign, about } = req.body || {};
+    if (!/^\.?[A-Za-z0-9_ ]{3,16}$/.test(ign || '') || !about || about.length > 600) return res.status(400).end();
     const r = await fetch(E.WEBHOOK_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         allowed_mentions: { parse: [] },
         embeds: [{
-          title: '📝 New Whitelist Application', color: 0x10b981,
+          title: 'Whitelist application', color: 0x10b981,
           fields: [
-            { name: 'Discord', value: `<@${s.id}> (${s.name})`, inline: true },
-            { name: 'Minecraft IGN', value: ign, inline: true },
-            { name: 'About / Intro', value: about },
+            { name: 'Discord', value: `<@${s.id}> (${s.name})` },
+            { name: 'Minecraft IGN', value: ign },
+            { name: 'About', value: about },
           ],
-          timestamp: new Date().toISOString()
         }],
       }),
     });
@@ -142,23 +130,7 @@ const routes = {
 };
 
 module.exports = async (req, res) => {
-  if (req.method === 'POST' && !req.body) {
-    await new Promise(resolve => {
-      let data = '';
-      req.on('data', chunk => data += chunk);
-      req.on('end', () => {
-        try { req.body = JSON.parse(data); } catch { req.body = data; }
-        resolve();
-      });
-    });
-  }
-
-  let name = req.query.action;
-  if (!name) {
-    const parts = req.url.split('?')[0].split('/');
-    name = parts[parts.length - 1];
-  }
-
+  const name = req.query.action;
   if (!Object.hasOwn(routes, name)) return res.status(404).end();
   try { await routes[name](req, res); }
   catch (e) { console.error(e); res.status(500).json({ error: 'server' }); }
