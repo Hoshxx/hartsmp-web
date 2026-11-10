@@ -4,6 +4,8 @@
   "outputDirectory": "public",
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/bluemap/:path*", "destination": "/api/bluemap?path=:path*" }
+    { "source": "/bluemap", "destination": "/api/bluemap" },
+    { "source": "/bluemap/", "destination": "/api/bluemap" },
+    { "source": "/bluemap/:path+", "destination": "/api/bluemap?path=:path+" }
   ]
 }
