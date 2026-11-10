@@ -4,6 +4,6 @@
   "outputDirectory": "public",
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/bluemap/:path*", "destination": "http://51.79.149.23:25759/:path*" }
+    { "source": "/bluemap/:path*", "destination": "/api/bluemap?path=:path*" }
   ]
 }
