@@ -22,7 +22,6 @@
 
     <link rel="stylesheet" href="/tw.css">
 </head>
-<!-- Changed overflow-x-hidden to overflow-x-clip to restore smooth scrolling -->
 <body class="bg-slate-950 text-slate-300 font-sans antialiased selection:bg-emerald-500/30 selection:text-emerald-200 overflow-x-clip">
 
     <!-- Sticky Navbar -->
@@ -48,7 +47,6 @@
                         <a href="#mods" class="px-4 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Mods</a>
                         <a href="#gallery" class="px-4 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Gallery</a>
                         <a href="#support" class="px-4 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Support</a>
-                        <!-- Added Live Map Link -->
                         <a href="/map.html" class="px-4 py-2 rounded-md text-sm font-medium text-pink-400 hover:text-pink-300 hover:bg-white/5 transition-colors flex items-center gap-1"><i class="ph-bold ph-map-trifold"></i> Map</a>
                     </div>
                 </div>
@@ -78,7 +76,6 @@
                 <a href="#mods" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Mods</a>
                 <a href="#gallery" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Gallery</a>
                 <a href="#support" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Support</a>
-                <!-- Added Live Map Link to Mobile Menu -->
                 <a href="/map.html" class="flex items-center gap-2 px-3 py-2 rounded-md text-base font-medium text-pink-400 hover:text-pink-300 hover:bg-white/5"><i class="ph-bold ph-map-trifold"></i> Live Map</a>
                 <button class="w-full mt-4 flex items-center justify-center gap-2 bg-discord hover:bg-discordHover text-white px-5 py-3 rounded-lg font-medium transition-all">
                     <i class="ph-fill ph-discord-logo text-xl"></i>
@@ -377,9 +374,13 @@
     <!-- Footer -->
     <footer class="border-t border-white/5 bg-slate-950 py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="flex items-center gap-2">
-                <i class="ph-fill ph-cube text-xl text-emerald-500"></i>
-                <span class="font-heading font-bold text-lg text-white">HartSMP</span>
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-pink-500/20 to-pink-600/30 border border-pink-500/40 flex items-center justify-center text-pink-400 shadow-[0_0_15px_rgba(236,72,153,0.2)]">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                </div>
+                <span class="font-heading font-bold text-lg text-white">Hart<span class="text-pink-500">SMP</span></span>
             </div>
             
             <p class="text-sm text-slate-500 text-center md:text-left">
@@ -387,11 +388,8 @@
             </p>
 
             <div class="flex gap-4">
-                <a href="https://discord.gg/REPLACE_ME" target="_blank" rel="noopener" aria-label="Discord" class="text-slate-500 hover:text-white transition-colors">
+                <a href="https://discord.gg/pAR8Q3J3R" target="_blank" rel="noopener" aria-label="Discord" class="text-slate-500 hover:text-white transition-colors">
                     <i class="ph-fill ph-discord-logo text-2xl"></i>
-                </a>
-                <a href="https://github.com/Hoshxx/hartsmp-web" target="_blank" rel="noopener" aria-label="GitHub" class="text-slate-500 hover:text-white transition-colors">
-                    <i class="ph-fill ph-github-logo text-2xl"></i>
                 </a>
             </div>
         </div>
@@ -407,7 +405,7 @@
 
     <!-- Scripts -->
     <script>
-        const DISCORD_INVITE = 'https://discord.gg/REPLACE_ME';
+        const DISCORD_INVITE = 'https://discord.gg/pAR8Q3J3R';
         const $ = id => document.getElementById(id);
         let user = { loggedIn: false };
 
