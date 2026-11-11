@@ -94,31 +94,31 @@
 
         <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
 
-            <!-- Release Countdown Timer -->
-            <div id="countdown-container" class="mb-6 flex flex-col items-center">
-                <span class="text-pink-500 font-bold tracking-widest uppercase text-xs mb-3">Server Opens In</span>
-                <div class="flex gap-3 text-center">
-                    <div class="glass border border-white/10 rounded-xl px-4 py-3 min-w-[75px]">
-                        <div id="cd-days" class="text-3xl font-heading font-bold text-white">00</div>
-                        <div class="text-[10px] text-slate-400 uppercase tracking-widest mt-1">Days</div>
+            <!-- Release Countdown Timer (Bigger & Higher) -->
+            <div id="countdown-container" class="mb-10 md:mb-12 flex flex-col items-center">
+                <span class="text-pink-500 font-bold tracking-widest uppercase text-sm md:text-base mb-4 drop-shadow-md">Server Opens In</span>
+                <div class="flex gap-3 md:gap-5 text-center">
+                    <div class="glass border border-white/10 rounded-2xl px-4 py-4 md:px-6 md:py-5 min-w-[80px] md:min-w-[110px] shadow-xl shadow-black/30 backdrop-blur-lg">
+                        <div id="cd-days" class="text-4xl md:text-6xl font-heading font-bold text-white tracking-tight drop-shadow-sm">00</div>
+                        <div class="text-[11px] md:text-sm text-slate-400 uppercase tracking-widest mt-2 font-medium">Days</div>
                     </div>
-                    <div class="glass border border-white/10 rounded-xl px-4 py-3 min-w-[75px]">
-                        <div id="cd-hours" class="text-3xl font-heading font-bold text-white">00</div>
-                        <div class="text-[10px] text-slate-400 uppercase tracking-widest mt-1">Hours</div>
+                    <div class="glass border border-white/10 rounded-2xl px-4 py-4 md:px-6 md:py-5 min-w-[80px] md:min-w-[110px] shadow-xl shadow-black/30 backdrop-blur-lg">
+                        <div id="cd-hours" class="text-4xl md:text-6xl font-heading font-bold text-white tracking-tight drop-shadow-sm">00</div>
+                        <div class="text-[11px] md:text-sm text-slate-400 uppercase tracking-widest mt-2 font-medium">Hours</div>
                     </div>
-                    <div class="glass border border-white/10 rounded-xl px-4 py-3 min-w-[75px]">
-                        <div id="cd-mins" class="text-3xl font-heading font-bold text-white">00</div>
-                        <div class="text-[10px] text-slate-400 uppercase tracking-widest mt-1">Mins</div>
+                    <div class="glass border border-white/10 rounded-2xl px-4 py-4 md:px-6 md:py-5 min-w-[80px] md:min-w-[110px] shadow-xl shadow-black/30 backdrop-blur-lg">
+                        <div id="cd-mins" class="text-4xl md:text-6xl font-heading font-bold text-white tracking-tight drop-shadow-sm">00</div>
+                        <div class="text-[11px] md:text-sm text-slate-400 uppercase tracking-widest mt-2 font-medium">Mins</div>
                     </div>
-                    <div class="glass border border-white/10 rounded-xl px-4 py-3 min-w-[75px]">
-                        <div id="cd-secs" class="text-3xl font-heading font-bold text-pink-400">00</div>
-                        <div class="text-[10px] text-slate-400 uppercase tracking-widest mt-1">Secs</div>
+                    <div class="glass border border-white/10 rounded-2xl px-4 py-4 md:px-6 md:py-5 min-w-[80px] md:min-w-[110px] shadow-xl shadow-pink-500/20 backdrop-blur-lg border-pink-500/30">
+                        <div id="cd-secs" class="text-4xl md:text-6xl font-heading font-bold text-pink-400 tracking-tight drop-shadow-[0_0_10px_rgba(236,72,153,0.5)]">00</div>
+                        <div class="text-[11px] md:text-sm text-pink-300/70 uppercase tracking-widest mt-2 font-medium">Secs</div>
                     </div>
                 </div>
             </div>
 
             <!-- Online Status Pill -->
-            <div id="status-pill" class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-emerald-500/30 mb-8">
+            <div id="status-pill" class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-emerald-500/30 mb-8 shadow-lg">
                 <span class="relative flex h-3 w-3">
                   <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                   <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
@@ -128,7 +128,7 @@
 
             <h1 class="text-5xl md:text-7xl font-heading font-extrabold text-white tracking-tight leading-tight mb-6">
                 A New Chapter Begins.<br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-rose-600">Together.</span>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-rose-600 drop-shadow-sm">Together.</span>
             </h1>
 
             <p class="mt-4 max-w-2xl text-lg md:text-xl text-slate-300 mb-10">
@@ -138,7 +138,7 @@
             <!-- IP Copy Box -->
             <div class="flex flex-col sm:flex-row items-center gap-4">
                 <div id="ip-box" onclick="copyIP()" class="cursor-pointer flex items-center gap-4 bg-slate-900/80 border border-pink-500/40 px-6 py-4 rounded-2xl shadow-xl backdrop-blur-md hover:border-pink-400 transition-all">
-                    <div class="w-12 h-12 rounded-xl bg-pink-500/20 border border-pink-500/30 flex items-center justify-center text-pink-400">
+                    <div class="w-12 h-12 rounded-xl bg-pink-500/20 border border-pink-500/30 flex items-center justify-center text-pink-400 shadow-[0_0_15px_rgba(236,72,153,0.2)]">
                         <i class="ph-bold ph-copy text-xl"></i>
                     </div>
                     <div>
@@ -147,7 +147,7 @@
                     </div>
                 </div>
 
-                <a href="#whitelist" class="px-8 py-4 rounded-2xl font-heading font-bold bg-white text-slate-900 hover:bg-slate-100 transition-all shadow-lg inline-flex items-center gap-2">
+                <a href="#whitelist" class="px-8 py-4 rounded-2xl font-heading font-bold bg-white text-slate-900 hover:bg-slate-100 transition-all shadow-lg shadow-white/10 inline-flex items-center gap-2">
                     Apply Now <i class="ph-bold ph-arrow-right"></i>
                 </a>
             </div>
@@ -169,7 +169,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Step 1 -->
-                <div class="glass-card rounded-2xl p-8 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+                <div class="glass-card rounded-2xl p-8 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300 shadow-lg shadow-black/20">
                     <div class="absolute top-0 right-0 -mr-4 -mt-4 text-9xl font-heading font-black text-white/[0.02] group-hover:text-white/[0.05] transition-colors pointer-events-none">1</div>
                     <div class="w-14 h-14 rounded-xl bg-discord/20 text-discord flex items-center justify-center mb-6">
                         <i class="ph-fill ph-discord-logo text-3xl"></i>
@@ -182,7 +182,7 @@
                 </div>
 
                 <!-- Step 2 -->
-                <div class="glass-card rounded-2xl p-8 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+                <div class="glass-card rounded-2xl p-8 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300 shadow-lg shadow-black/20">
                     <div class="absolute top-0 right-0 -mr-4 -mt-4 text-9xl font-heading font-black text-white/[0.02] group-hover:text-white/[0.05] transition-colors pointer-events-none">2</div>
                     <div class="w-14 h-14 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center mb-6">
                         <i class="ph-fill ph-scroll text-3xl"></i>
@@ -192,7 +192,7 @@
                 </div>
 
                 <!-- Step 3 -->
-                <div class="glass-card rounded-2xl p-8 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+                <div class="glass-card rounded-2xl p-8 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300 shadow-lg shadow-black/20">
                     <div class="absolute top-0 right-0 -mr-4 -mt-4 text-9xl font-heading font-black text-white/[0.02] group-hover:text-white/[0.05] transition-colors pointer-events-none">3</div>
                     <div class="w-14 h-14 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center mb-6">
                         <i class="ph-fill ph-paper-plane-tilt text-3xl"></i>
@@ -207,17 +207,17 @@
     <!-- Whitelist Application -->
     <section id="apply" class="py-20 border-t border-white/5">
         <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="glass-card rounded-2xl p-8">
+            <div class="glass-card rounded-2xl p-8 shadow-xl shadow-black/20">
                 <h2 class="text-2xl font-heading font-bold text-white mb-2">Whitelist Application</h2>
                 <p id="apply-msg" class="text-slate-400 mb-6">Checking your login…</p>
                 <form id="apply-form" class="hidden space-y-4">
                     <div>
                         <label for="ign" class="block text-sm text-slate-300 mb-1">Minecraft username</label>
-                        <input id="ign" required maxlength="17" pattern="\.?[A-Za-z0-9_ ]{3,16}" placeholder="Steve (Bedrock: .Steve)" class="w-full rounded-lg bg-slate-900 border border-white/10 px-4 py-2.5 text-white focus:border-pink-500 focus:outline-none">
+                        <input id="ign" required maxlength="17" pattern="\.?[A-Za-z0-9_ ]{3,16}" placeholder="Steve (Bedrock: .Steve)" class="w-full rounded-lg bg-slate-900 border border-white/10 px-4 py-2.5 text-white focus:border-pink-500 focus:outline-none transition-colors">
                     </div>
                     <div>
                         <label for="about" class="block text-sm text-slate-300 mb-1">Tell us about yourself</label>
-                        <textarea id="about" required maxlength="600" rows="4" class="w-full rounded-lg bg-slate-900 border border-white/10 px-4 py-2.5 text-white focus:border-pink-500 focus:outline-none"></textarea>
+                        <textarea id="about" required maxlength="600" rows="4" class="w-full rounded-lg bg-slate-900 border border-white/10 px-4 py-2.5 text-white focus:border-pink-500 focus:outline-none transition-colors"></textarea>
                     </div>
                     <!-- Edit these to match your real rules -->
                     <ul class="text-sm text-slate-400 list-disc pl-5 space-y-1">
@@ -225,10 +225,10 @@
                         <li>No stealing</li>
                         <li>No griefing</li>
                     </ul>
-                    <label class="flex items-start gap-2 text-sm text-slate-300">
+                    <label class="flex items-start gap-2 text-sm text-slate-300 cursor-pointer">
                         <input id="rules" type="checkbox" required class="mt-1 accent-pink-500"> I've read and accept the rules.
                     </label>
-                    <button type="submit" id="apply-btn" class="w-full rounded-lg bg-pink-600 hover:bg-pink-500 text-white font-semibold py-3 transition-colors disabled:opacity-60">Submit application</button>
+                    <button type="submit" id="apply-btn" class="w-full rounded-lg bg-pink-600 hover:bg-pink-500 text-white font-semibold py-3 transition-all hover:shadow-lg hover:shadow-pink-500/20 disabled:opacity-60 disabled:hover:shadow-none">Submit application</button>
                 </form>
             </div>
         </div>
@@ -251,7 +251,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
                 <!-- HartSMP Modpack Card -->
-                <div class="bg-slate-850 p-6 rounded-2xl border border-white/5 hover:border-pink-500/30 transition-colors">
+                <div class="bg-slate-850 p-6 rounded-2xl border border-white/5 hover:border-pink-500/30 transition-colors shadow-lg shadow-black/10">
                     <div class="flex items-center gap-4 mb-4">
                         <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='8' fill='%231e293b'/%3E%3Ctext x='24' y='32' font-family='sans-serif' font-size='24' font-weight='700' text-anchor='middle' fill='%23ec4899'%3EM%3C/text%3E%3C/svg%3E" class="w-12 h-12 flex-shrink-0 rounded-lg shadow-md" alt="Modpack Icon">
                         <div>
@@ -266,7 +266,7 @@
                 </div>
 
                 <!-- Sodium Card -->
-                <div class="bg-slate-850 p-6 rounded-2xl border border-white/5 hover:border-emerald-500/30 transition-colors">
+                <div class="bg-slate-850 p-6 rounded-2xl border border-white/5 hover:border-emerald-500/30 transition-colors shadow-lg shadow-black/10">
                     <div class="flex items-center gap-4 mb-4">
                         <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='8' fill='%231e293b'/%3E%3Ctext x='24' y='32' font-family='sans-serif' font-size='24' font-weight='700' text-anchor='middle' fill='%2310b981'%3ES%3C/text%3E%3C/svg%3E" class="w-12 h-12 flex-shrink-0 rounded-lg shadow-md" alt="Sodium Icon">
                         <div>
@@ -281,7 +281,7 @@
                 </div>
 
                 <!-- Iris Card -->
-                <div class="bg-slate-850 p-6 rounded-2xl border border-white/5 hover:border-purple-500/30 transition-colors">
+                <div class="bg-slate-850 p-6 rounded-2xl border border-white/5 hover:border-purple-500/30 transition-colors shadow-lg shadow-black/10">
                     <div class="flex items-center gap-4 mb-4">
                         <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='8' fill='%231e293b'/%3E%3Ctext x='24' y='32' font-family='sans-serif' font-size='24' font-weight='700' text-anchor='middle' fill='%23a855f7'%3EI%3C/text%3E%3C/svg%3E" class="w-12 h-12 flex-shrink-0 rounded-lg shadow-md" alt="Iris Icon">
                         <div>
@@ -309,7 +309,7 @@
 
             <!-- CSS Multi-column Masonry. Missing images are swapped for a placeholder tile by the script at the bottom. -->
             <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
-                <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-slate-900 border border-white/5">
+                <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-slate-900 border border-white/5 shadow-lg">
                     <div class="img-gradient relative h-full w-full">
                         <img src="assets/gallery/1.jpg" loading="lazy" alt="The Genesis, Season 1" class="w-full object-cover transform group-hover:scale-105 transition-transform duration-700">
                     </div>
@@ -319,7 +319,7 @@
                     </div>
                 </div>
 
-                <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-slate-900 border border-white/5">
+                <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-slate-900 border border-white/5 shadow-lg">
                     <div class="img-gradient relative h-full w-full">
                         <img src="assets/gallery/2.jpg" loading="lazy" alt="Fighting the Ender Dragon in leather and wooden gear" class="w-full object-cover transform group-hover:scale-105 transition-transform duration-700">
                     </div>
@@ -329,7 +329,7 @@
                     </div>
                 </div>
 
-                <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-slate-900 border border-white/5">
+                <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-slate-900 border border-white/5 shadow-lg">
                     <div class="img-gradient relative h-full w-full">
                         <img src="assets/gallery/3.jpg" loading="lazy" alt="The last moments before the server shut down" class="w-full object-cover transform group-hover:scale-105 transition-transform duration-700">
                     </div>
@@ -339,7 +339,7 @@
                     </div>
                 </div>
 
-                <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-slate-900 border border-white/5">
+                <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-slate-900 border border-white/5 shadow-lg">
                     <div class="img-gradient relative h-full w-full">
                         <img src="assets/gallery/4.jpg" loading="lazy" alt="Group photo from the start of the server" class="w-full object-cover transform group-hover:scale-105 transition-transform duration-700">
                     </div>
@@ -349,7 +349,7 @@
                     </div>
                 </div>
 
-                <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-slate-900 border border-white/5">
+                <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-slate-900 border border-white/5 shadow-lg">
                     <div class="img-gradient relative h-full w-full">
                         <img src="assets/gallery/5.jpg" loading="lazy" alt="A wild brown panda" class="w-full object-cover transform group-hover:scale-105 transition-transform duration-700">
                     </div>
@@ -365,7 +365,7 @@
     <!-- Support Us (Ko-fi Style) -->
     <section id="support" class="py-24 bg-slate-900/30 border-t border-white/5">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="glass-card rounded-3xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-10">
+            <div class="glass-card rounded-3xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-10 shadow-2xl shadow-black/20">
                 <div class="md:w-1/2">
                     <div class="w-12 h-12 bg-rose-500/20 text-rose-500 rounded-full flex items-center justify-center mb-6">
                         <i class="ph-fill ph-heart text-2xl"></i>
