@@ -542,7 +542,14 @@
             if (distance < 0) {
                 clearInterval(cdInterval);
                 const cdContainer = $('countdown-container');
-                if (cdContainer) cdContainer.style.display = 'none';
+                if (cdContainer) {
+                    cdContainer.innerHTML = `
+                        <div class="glass border border-emerald-500/50 rounded-2xl px-8 py-5 shadow-2xl shadow-emerald-500/20 backdrop-blur-lg bg-emerald-500/10 text-center animate-pulse">
+                            <span class="text-3xl md:text-4xl font-heading font-bold text-emerald-400 drop-shadow-[0_0_10px_rgba(52,211,153,0.4)]">Server is Live!</span>
+                            <p class="text-sm md:text-base text-emerald-100 mt-2 font-medium tracking-wide">Join us in-game now.</p>
+                        </div>
+                    `;
+                }
                 return;
             }
 
