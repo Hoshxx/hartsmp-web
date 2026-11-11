@@ -94,6 +94,29 @@
 
         <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
 
+            <!-- Release Countdown Timer -->
+            <div id="countdown-container" class="mb-6 flex flex-col items-center">
+                <span class="text-pink-500 font-bold tracking-widest uppercase text-xs mb-3">Server Opens In</span>
+                <div class="flex gap-3 text-center">
+                    <div class="glass border border-white/10 rounded-xl px-4 py-3 min-w-[75px]">
+                        <div id="cd-days" class="text-3xl font-heading font-bold text-white">00</div>
+                        <div class="text-[10px] text-slate-400 uppercase tracking-widest mt-1">Days</div>
+                    </div>
+                    <div class="glass border border-white/10 rounded-xl px-4 py-3 min-w-[75px]">
+                        <div id="cd-hours" class="text-3xl font-heading font-bold text-white">00</div>
+                        <div class="text-[10px] text-slate-400 uppercase tracking-widest mt-1">Hours</div>
+                    </div>
+                    <div class="glass border border-white/10 rounded-xl px-4 py-3 min-w-[75px]">
+                        <div id="cd-mins" class="text-3xl font-heading font-bold text-white">00</div>
+                        <div class="text-[10px] text-slate-400 uppercase tracking-widest mt-1">Mins</div>
+                    </div>
+                    <div class="glass border border-white/10 rounded-xl px-4 py-3 min-w-[75px]">
+                        <div id="cd-secs" class="text-3xl font-heading font-bold text-pink-400">00</div>
+                        <div class="text-[10px] text-slate-400 uppercase tracking-widest mt-1">Secs</div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Online Status Pill -->
             <div id="status-pill" class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-emerald-500/30 mb-8">
                 <span class="relative flex h-3 w-3">
@@ -508,6 +531,26 @@
             img.addEventListener('error', fix, { once: true });
             if (img.complete && img.naturalWidth === 0) fix();
         });
+
+        // Release Countdown Timer (Target: Nov 15, 2026 @ 7:00 PM Manila Time)
+        const targetDate = new Date('2026-11-15T19:00:00+08:00').getTime();
+
+        const cdInterval = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                clearInterval(cdInterval);
+                const cdContainer = $('countdown-container');
+                if (cdContainer) cdContainer.style.display = 'none';
+                return;
+            }
+
+            $('cd-days').textContent = String(Math.floor(distance / (1000 * 60 * 60 * 24))).padStart(2, '0');
+            $('cd-hours').textContent = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+            $('cd-mins').textContent = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+            $('cd-secs').textContent = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
+        }, 1000);
 
         init(); status();
     </script>
