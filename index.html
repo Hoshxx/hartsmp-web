@@ -3,26 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HartSMP | Fabric & Purpur Cross-Play</title>
-    <meta name="description" content="HartSMP: a whitelisted Fabric &amp; Purpur Minecraft SMP with Java and Bedrock cross-play.">
+    <title>HartSMP | Java & Bedrock Survival SMP</title>
+    <meta name="description" content="HartSMP: a whitelisted Purpur survival SMP with Java and Bedrock cross-play, jobs, player shops and land claims.">
     <meta name="theme-color" content="#0b0f19">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="HartSMP | Fabric &amp; Purpur Cross-Play">
-    <meta property="og:description" content="HartSMP: a whitelisted Fabric &amp; Purpur Minecraft SMP with Java and Bedrock cross-play.">
+    <meta property="og:title" content="HartSMP | Java & Bedrock Survival SMP">
+    <meta property="og:description" content="A whitelisted survival SMP with Java and Bedrock cross-play, jobs, player shops and land claims.">
     <meta property="og:url" content="https://hartsmp.art">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%B1%3C/text%3E%3C/svg%3E">
-    
+
     <!-- Fonts: Poppins for Headings, Inter for Body -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
 
     <link rel="stylesheet" href="/tw.css">
 </head>
-<body class="bg-slate-950 text-slate-300 font-sans antialiased selection:bg-emerald-500/30 selection:text-emerald-200 overflow-x-clip">
+<body class="bg-slate-950 text-slate-300 font-sans antialiased selection:bg-pink-500/30 selection:text-pink-100 overflow-x-clip">
 
     <!-- Sticky Navbar -->
     <nav class="fixed w-full z-50 transition-all duration-300 glass border-b-0" id="navbar">
@@ -35,10 +35,9 @@
                             <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
                         </svg>
                     </div>
-                    <!-- "SMP" made pink -->
                     <span class="font-heading font-bold text-2xl text-white tracking-tight">Hart<span class="text-pink-500">SMP</span></span>
                 </div>
-                
+
                 <!-- Desktop Menu -->
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-1">
@@ -47,7 +46,8 @@
                         <a href="#mods" class="px-4 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Mods</a>
                         <a href="#gallery" class="px-4 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Gallery</a>
                         <a href="#support" class="px-4 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Support</a>
-                        <a href="/map.html" class="px-4 py-2 rounded-md text-sm font-medium text-pink-400 hover:text-pink-300 hover:bg-white/5 transition-colors flex items-center gap-1"><i class="ph-bold ph-map-trifold"></i> Map</a>
+                        <a href="/features" class="px-4 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Features</a>
+                        <a href="/map" class="px-4 py-2 rounded-md text-sm font-medium text-pink-400 hover:text-pink-300 hover:bg-white/5 transition-colors flex items-center gap-1"><i class="ph-bold ph-map-trifold"></i> Map</a>
                     </div>
                 </div>
 
@@ -76,7 +76,8 @@
                 <a href="#mods" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Mods</a>
                 <a href="#gallery" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Gallery</a>
                 <a href="#support" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Support</a>
-                <a href="/map.html" class="flex items-center gap-2 px-3 py-2 rounded-md text-base font-medium text-pink-400 hover:text-pink-300 hover:bg-white/5"><i class="ph-bold ph-map-trifold"></i> Live Map</a>
+                <a href="/features" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">Features</a>
+                <a href="/map" class="flex items-center gap-2 px-3 py-2 rounded-md text-base font-medium text-pink-400 hover:text-pink-300 hover:bg-white/5"><i class="ph-bold ph-map-trifold"></i> Live Map</a>
                 <button class="w-full mt-4 flex items-center justify-center gap-2 bg-discord hover:bg-discordHover text-white px-5 py-3 rounded-lg font-medium transition-all">
                     <i class="ph-fill ph-discord-logo text-xl"></i>
                     Login with Discord
@@ -92,7 +93,7 @@
         <div class="absolute bottom-1/4 right-1/4 w-[30rem] h-[30rem] bg-amber-500/10 rounded-full blur-[150px] pointer-events-none"></div>
 
         <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
-            
+
             <!-- Online Status Pill -->
             <div id="status-pill" class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-emerald-500/30 mb-8">
                 <span class="relative flex h-3 w-3">
@@ -104,10 +105,9 @@
 
             <h1 class="text-5xl md:text-7xl font-heading font-extrabold text-white tracking-tight leading-tight mb-6">
                 A New Chapter Begins.<br>
-                <!-- "Together" made pink gradient -->
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-rose-600">Together.</span>
             </h1>
-            
+
             <p class="mt-4 max-w-2xl text-lg md:text-xl text-slate-300 mb-10">
                 Step into our brand new world featuring cross-play, zero pay-to-win, and a community built to last.
             </p>
@@ -123,13 +123,13 @@
                         <p id="server-ip" class="font-mono text-lg font-bold text-white tracking-wide">Get whitelisted to reveal</p>
                     </div>
                 </div>
-                
+
                 <a href="#whitelist" class="px-8 py-4 rounded-2xl font-heading font-bold bg-white text-slate-900 hover:bg-slate-100 transition-all shadow-lg inline-flex items-center gap-2">
                     Apply Now <i class="ph-bold ph-arrow-right"></i>
                 </a>
             </div>
         </div>
-        
+
         <!-- Scroll indicator -->
         <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
             <i class="ph ph-caret-down text-3xl text-slate-500"></i>
@@ -190,11 +190,11 @@
                 <form id="apply-form" class="hidden space-y-4">
                     <div>
                         <label for="ign" class="block text-sm text-slate-300 mb-1">Minecraft username</label>
-                        <input id="ign" required maxlength="17" pattern="\.?[A-Za-z0-9_ ]{3,16}" placeholder="Steve (Bedrock: .Steve)" class="w-full rounded-lg bg-slate-900 border border-white/10 px-4 py-2.5 text-white focus:border-emerald-500 focus:outline-none">
+                        <input id="ign" required maxlength="17" pattern="\.?[A-Za-z0-9_ ]{3,16}" placeholder="Steve (Bedrock: .Steve)" class="w-full rounded-lg bg-slate-900 border border-white/10 px-4 py-2.5 text-white focus:border-pink-500 focus:outline-none">
                     </div>
                     <div>
                         <label for="about" class="block text-sm text-slate-300 mb-1">Tell us about yourself</label>
-                        <textarea id="about" required maxlength="600" rows="4" class="w-full rounded-lg bg-slate-900 border border-white/10 px-4 py-2.5 text-white focus:border-emerald-500 focus:outline-none"></textarea>
+                        <textarea id="about" required maxlength="600" rows="4" class="w-full rounded-lg bg-slate-900 border border-white/10 px-4 py-2.5 text-white focus:border-pink-500 focus:outline-none"></textarea>
                     </div>
                     <!-- Edit these to match your real rules -->
                     <ul class="text-sm text-slate-400 list-disc pl-5 space-y-1">
@@ -203,9 +203,9 @@
                         <li>No griefing</li>
                     </ul>
                     <label class="flex items-start gap-2 text-sm text-slate-300">
-                        <input id="rules" type="checkbox" required class="mt-1 accent-emerald-500"> I've read and accept the rules.
+                        <input id="rules" type="checkbox" required class="mt-1 accent-pink-500"> I've read and accept the rules.
                     </label>
-                    <button type="submit" id="apply-btn" class="w-full rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold py-3 transition-colors">Submit application</button>
+                    <button type="submit" id="apply-btn" class="w-full rounded-lg bg-pink-600 hover:bg-pink-500 text-white font-semibold py-3 transition-colors disabled:opacity-60">Submit application</button>
                 </form>
             </div>
         </div>
@@ -220,13 +220,13 @@
                     <p class="text-slate-400 max-w-xl">Whether you play on Java or Bedrock, we've got you covered. Here are our recommended client mods for the best experience.</p>
                 </div>
                 <div class="flex gap-3">
-                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-white/10 text-white border border-white/10">Fabric · version 26.3</span>
-                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-white/10 text-white border border-white/10">Purpur · version 26.3</span>
+                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-white/10 text-white border border-white/10">Client mods: Fabric 26.3</span>
+                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-white/10 text-white border border-white/10">Server: Purpur 26.3</span>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                
+
                 <!-- HartSMP Modpack Card -->
                 <div class="bg-slate-850 p-6 rounded-2xl border border-white/5 hover:border-pink-500/30 transition-colors">
                     <div class="flex items-center gap-4 mb-4">
@@ -252,7 +252,7 @@
                         </div>
                     </div>
                     <p class="text-sm text-slate-400 mb-6">Highly recommended for Java players. Dramatically improves framerates and reduces micro-stutters better than Optifine.</p>
-                    <a href="https://modrinth.com/mod/sodium" target="_blank" class="inline-flex items-center gap-2 text-sm font-medium text-emerald-400 hover:text-emerald-300 transition-colors">
+                    <a href="https://modrinth.com/mod/sodium" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-medium text-emerald-400 hover:text-emerald-300 transition-colors">
                         Download via Modrinth <i class="ph-bold ph-download-simple"></i>
                     </a>
                 </div>
@@ -267,7 +267,7 @@
                         </div>
                     </div>
                     <p class="text-sm text-slate-400 mb-6">Want the game to look like our screenshots? Install Iris alongside Sodium to run modern shader packs flawlessly.</p>
-                    <a href="https://modrinth.com/mod/iris" target="_blank" class="inline-flex items-center gap-2 text-sm font-medium text-purple-400 hover:text-purple-300 transition-colors">
+                    <a href="https://modrinth.com/mod/iris" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-medium text-purple-400 hover:text-purple-300 transition-colors">
                         Download via Modrinth <i class="ph-bold ph-download-simple"></i>
                     </a>
                 </div>
@@ -284,59 +284,54 @@
                 <p class="text-slate-400 max-w-2xl mx-auto">A look back at the incredible builds and memories from past seasons.</p>
             </div>
 
-            <!-- CSS Multi-column Masonry -->
+            <!-- CSS Multi-column Masonry. Missing images are swapped for a placeholder tile by the script at the bottom. -->
             <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
-                <!-- Image Item -->
                 <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-slate-900 border border-white/5">
                     <div class="img-gradient relative h-full w-full">
-                        <img src="assets/gallery/1.jpg" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%231e293b'/%3E%3Ctext x='400' y='310' font-family='sans-serif' font-size='28' text-anchor='middle' fill='%2364748b'%3EScreenshot coming soon%3C/text%3E%3C/svg%3E'" alt="Minecraft Castle Build" class="w-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                        <img src="assets/gallery/1.jpg" loading="lazy" alt="The Genesis, Season 1" class="w-full object-cover transform group-hover:scale-105 transition-transform duration-700">
                     </div>
                     <div class="absolute bottom-0 left-0 p-6 z-10">
-                        <p class="text-emerald-400 text-xs font-bold uppercase tracking-wider mb-1">Season 1</p>
+                        <p class="text-pink-400 text-xs font-bold uppercase tracking-wider mb-1">Season 1</p>
                         <h3 class="text-white font-medium text-lg">The Genesis</h3>
                     </div>
                 </div>
 
-                <!-- Image Item -->
                 <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-slate-900 border border-white/5">
                     <div class="img-gradient relative h-full w-full">
-                        <img src="assets/gallery/2.jpg" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%231e293b'/%3E%3Ctext x='400' y='310' font-family='sans-serif' font-size='28' text-anchor='middle' fill='%2364748b'%3EScreenshot coming soon%3C/text%3E%3C/svg%3E'" alt="Server Spawn" class="w-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                        <img src="assets/gallery/2.jpg" loading="lazy" alt="Fighting the Ender Dragon in leather and wooden gear" class="w-full object-cover transform group-hover:scale-105 transition-transform duration-700">
                     </div>
                     <div class="absolute bottom-0 left-0 p-6 z-10">
-                        <p class="text-emerald-400 text-xs font-bold uppercase tracking-wider mb-1">The Leather Stuff Fight</p>
+                        <p class="text-pink-400 text-xs font-bold uppercase tracking-wider mb-1">The Leather Stuff Fight</p>
                         <h3 class="text-white font-medium text-lg">Killing the Dragon with nothing but leather and wood stuff lol</h3>
                     </div>
                 </div>
 
-                <!-- Image Item -->
                 <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-slate-900 border border-white/5">
                     <div class="img-gradient relative h-full w-full">
-                        <img src="assets/gallery/3.jpg" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%231e293b'/%3E%3Ctext x='400' y='310' font-family='sans-serif' font-size='28' text-anchor='middle' fill='%2364748b'%3EScreenshot coming soon%3C/text%3E%3C/svg%3E'" alt="Redstone Contraption" class="w-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                        <img src="assets/gallery/3.jpg" loading="lazy" alt="The last moments before the server shut down" class="w-full object-cover transform group-hover:scale-105 transition-transform duration-700">
                     </div>
                     <div class="absolute bottom-0 left-0 p-6 z-10">
-                        <p class="text-emerald-400 text-xs font-bold uppercase tracking-wider mb-1">2025</p>
+                        <p class="text-pink-400 text-xs font-bold uppercase tracking-wider mb-1">2025</p>
                         <h3 class="text-white font-medium text-lg">Before going off!</h3>
                     </div>
                 </div>
 
-                <!-- Image Item -->
                 <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-slate-900 border border-white/5">
                     <div class="img-gradient relative h-full w-full">
-                        <img src="assets/gallery/4.jpg" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%231e293b'/%3E%3Ctext x='400' y='310' font-family='sans-serif' font-size='28' text-anchor='middle' fill='%2364748b'%3EScreenshot coming soon%3C/text%3E%3C/svg%3E'" alt="Nighttime City" class="w-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                        <img src="assets/gallery/4.jpg" loading="lazy" alt="Group photo from the start of the server" class="w-full object-cover transform group-hover:scale-105 transition-transform duration-700">
                     </div>
                     <div class="absolute bottom-0 left-0 p-6 z-10">
-                        <p class="text-emerald-400 text-xs font-bold uppercase tracking-wider mb-1">Starting together</p>
+                        <p class="text-pink-400 text-xs font-bold uppercase tracking-wider mb-1">Starting together</p>
                         <h3 class="text-white font-medium text-lg">Taking a pic!</h3>
                     </div>
                 </div>
-                
-                <!-- Image Item -->
+
                 <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-slate-900 border border-white/5">
                     <div class="img-gradient relative h-full w-full">
-                        <img src="assets/gallery/5.jpg" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%231e293b'/%3E%3Ctext x='400' y='310' font-family='sans-serif' font-size='28' text-anchor='middle' fill='%2364748b'%3EScreenshot coming soon%3C/text%3E%3C/svg%3E'" alt="Underground Base" class="w-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                        <img src="assets/gallery/5.jpg" loading="lazy" alt="A wild brown panda" class="w-full object-cover transform group-hover:scale-105 transition-transform duration-700">
                     </div>
                     <div class="absolute bottom-0 left-0 p-6 z-10">
-                        <p class="text-emerald-400 text-xs font-bold uppercase tracking-wider mb-1">Rare Find</p>
+                        <p class="text-pink-400 text-xs font-bold uppercase tracking-wider mb-1">Rare Find</p>
                         <h3 class="text-white font-medium text-lg">Just a random wild brown panda.</h3>
                     </div>
                 </div>
@@ -362,7 +357,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="md:w-1/2 w-full flex justify-center">
                     <!-- Embedded Ko-fi Widget -->
                     <iframe id='kofiframe' src='https://ko-fi.com/xhosh/?hidefeed=true&widget=true&embed=true' style='border:none;width:100%;padding:4px;background:transparent;border-radius:0.75rem;' height='712' title='xhosh'></iframe>
@@ -382,13 +377,13 @@
                 </div>
                 <span class="font-heading font-bold text-lg text-white">Hart<span class="text-pink-500">SMP</span></span>
             </div>
-            
+
             <p class="text-sm text-slate-500 text-center md:text-left">
                 Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.
             </p>
 
             <div class="flex gap-4">
-                <a href="https://discord.gg/YOUR_INVITE_CODE_HERE" target="_blank" rel="noopener" aria-label="Discord" class="text-slate-500 hover:text-white transition-colors">
+                <a href="https://discord.gg/nYDw2m7EM" target="_blank" rel="noopener" aria-label="Discord" class="text-slate-500 hover:text-white transition-colors">
                     <i class="ph-fill ph-discord-logo text-2xl"></i>
                 </a>
             </div>
@@ -405,7 +400,7 @@
 
     <!-- Scripts -->
     <script>
-        const DISCORD_INVITE = 'https://discord.gg/YOUR_INVITE_CODE_HERE';
+        const DISCORD_INVITE = 'https://discord.gg/nYDw2m7EM';
         const $ = id => document.getElementById(id);
         let user = { loggedIn: false };
 
@@ -455,7 +450,7 @@
                 $('ip-label').textContent = `Java · Bedrock port ${user.bedrockPort}`;
                 msg.textContent = "You're whitelisted. The server address is at the top of the page.";
             } else if (!user.inGuild) {
-                msg.innerHTML = `Join our <a class="text-emerald-400 underline" href="${DISCORD_INVITE}" target="_blank" rel="noopener">Discord server</a> first, then log in again.`;
+                msg.innerHTML = `Join our <a class="text-pink-400 underline" href="${DISCORD_INVITE}" target="_blank" rel="noopener">Discord server</a> first, then log in again.`;
             } else {
                 msg.textContent = `Logged in as ${user.name}. Fill this in and our admins will review it.`;
                 $('apply-form').classList.remove('hidden');
@@ -505,6 +500,14 @@
             });
         }), { rootMargin: '-45% 0px -50% 0px' });
         ['home', 'whitelist', 'mods', 'gallery', 'support'].forEach(id => io.observe($(id)));
+
+        // Gallery: swap any missing screenshot for a placeholder tile
+        const PH = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%231e293b'/%3E%3Ctext x='400' y='310' font-family='sans-serif' font-size='28' text-anchor='middle' fill='%2364748b'%3EScreenshot coming soon%3C/text%3E%3C/svg%3E";
+        document.querySelectorAll('#gallery img').forEach(img => {
+            const fix = () => { img.src = PH; };
+            img.addEventListener('error', fix, { once: true });
+            if (img.complete && img.naturalWidth === 0) fix();
+        });
 
         init(); status();
     </script>
