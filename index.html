@@ -361,33 +361,65 @@
             </div>
         </div>
     </section>
-
-    <!-- Support Us (Ko-fi Style) -->
+    
+    <!-- Support Us (GCash) -->
     <section id="support" class="py-24 bg-slate-900/30 border-t border-white/5">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="glass-card rounded-3xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-10 shadow-2xl shadow-black/20">
-                <div class="md:w-1/2">
-                    <div class="w-12 h-12 bg-rose-500/20 text-rose-500 rounded-full flex items-center justify-center mb-6">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card rounded-3xl p-8 md:p-12 shadow-2xl shadow-black/20">
+                <div class="text-center mb-10">
+                    <div class="w-12 h-12 bg-rose-500/20 text-rose-500 rounded-full flex items-center justify-center mb-6 mx-auto">
                         <i class="ph-fill ph-heart text-2xl"></i>
                     </div>
                     <h2 class="text-3xl font-heading font-bold text-white mb-4">Keep the Lights On</h2>
-                    <p class="text-slate-400 mb-6">Hosting isn't free. We rely on community donations to cover monthly hosting and domain fees. No pay-to-win, just pure support.</p>
-                    <div class="glass-card rounded-2xl p-4 flex items-center gap-4">
-                        <img src="assets/gcash-qr.png" alt="GCash QR Ph code" class="w-24 h-24 rounded-lg bg-white object-contain" onerror="this.style.display='none'">
-                        <div>
-                            <h3 class="font-heading font-semibold text-white">GCash / Maya</h3>
-                            <p class="text-sm text-slate-400">Scan with GCash, Maya or any bank app, then open a ticket in our Discord with the receipt so we can give you the Supporter role.</p>
-                        </div>
-                    </div>
+                    <p class="text-slate-400 max-w-xl mx-auto">Hosting isn't free. We rely on community donations to cover monthly hosting and domain fees. No pay-to-win, just pure support.</p>
                 </div>
 
-                <div class="md:w-1/2 w-full flex justify-center">
-                    <!-- Embedded Ko-fi Widget -->
-                    <iframe id='kofiframe' src='https://ko-fi.com/xhosh/?hidefeed=true&widget=true&embed=true' style='border:none;width:100%;padding:4px;background:transparent;border-radius:0.75rem;' height='712' title='xhosh'></iframe>
+                <div class="flex flex-col md:flex-row items-center gap-8 md:gap-10">
+                    <!-- QR -->
+                    <div class="shrink-0 text-center">
+                        <img src="assets/gcash-qr.png" alt="GCash QR Ph code for HartSMP" class="w-48 h-48 rounded-2xl bg-white p-3 object-contain mx-auto" onerror="this.style.display='none'">
+                        <a href="assets/gcash-qr.png" download="HartSMP-GCash-QR.png" class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-pink-400 hover:text-pink-300 transition-colors">
+                            <i class="ph-bold ph-download-simple"></i> Download QR
+                        </a>
+                    </div>
+
+                    <!-- Steps -->
+                    <div class="flex-1 w-full">
+                        <h3 class="font-heading font-semibold text-white text-lg mb-3">How to chip in</h3>
+                        <ol class="space-y-3 text-sm text-slate-300">
+                            <li class="flex gap-3"><span class="shrink-0 w-6 h-6 rounded-full bg-pink-500/20 text-pink-400 text-xs font-bold flex items-center justify-center">1</span>
+                                <span>Scan the QR with GCash, Maya or any bank app. On your phone? Download the QR, open GCash, tap <b class="text-white">Scan QR</b> and upload it from your gallery.</span></li>
+                            <li class="flex gap-3"><span class="shrink-0 w-6 h-6 rounded-full bg-pink-500/20 text-pink-400 text-xs font-bold flex items-center justify-center">2</span>
+                                <span>Screenshot your receipt.</span></li>
+                            <li class="flex gap-3"><span class="shrink-0 w-6 h-6 rounded-full bg-pink-500/20 text-pink-400 text-xs font-bold flex items-center justify-center">3</span>
+                                <span>Open a ticket in our Discord with the receipt and we'll give you the Supporter role.</span></li>
+                        </ol>
+
+                        <div class="mt-6 flex flex-wrap gap-3">
+                            <a href="https://discord.gg/nYDw2m7EM" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-discord hover:bg-discordHover text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-colors">
+                                <i class="ph-fill ph-discord-logo text-lg"></i> Open a ticket
+                            </a>
+                            <!-- Hidden until you paste a payment link into PAY_LINK below -->
+                            <a id="pay-link" href="#" target="_blank" rel="noopener noreferrer" class="hidden items-center gap-2 bg-pink-600 hover:bg-pink-500 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-colors">
+                                <i class="ph-bold ph-link"></i> Pay with a link instead
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+    <script>
+        // Paste your payment link here (PayMongo, HitPay, etc.) to show the "Pay with a link instead" button.
+        // Leave it empty and the button stays hidden.
+        const PAY_LINK = '';
+        if (PAY_LINK) {
+            const a = document.getElementById('pay-link');
+            a.href = PAY_LINK;
+            a.classList.remove('hidden');
+            a.classList.add('inline-flex');
+        }
+    </script>
 
     <!-- Footer -->
     <footer class="border-t border-white/5 bg-slate-950 py-12">
